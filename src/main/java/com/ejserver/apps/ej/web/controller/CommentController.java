@@ -7,7 +7,6 @@ import com.ejserver.apps.ej.service.ICommentService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,19 +23,16 @@ public class CommentController {
     private ICommentService commentService;
 
     @GetMapping("/findAll")
-    @Async
     public ActionResult findAll() {
         return ActionResultUtil.success("success", commentService.findAll());
     }
 
     @GetMapping("/findById")
-    @Async
     public ActionResult findById(Long id) {
         return ActionResultUtil.success("success", commentService.findById(id));
     }
 
     @PostMapping("/deleteById")
-    @Async
     public ActionResult deleteById(Long id) {
         try {
             commentService.deleteById(id);
@@ -49,7 +45,6 @@ public class CommentController {
     }
 
     @PostMapping("/insert")
-    @Async
     public ActionResult insert(Comment comment) {
         try {
             commentService.insert(comment);
@@ -61,7 +56,6 @@ public class CommentController {
     }
 
     @PostMapping("/saveOrUpdate")
-    @Async
     public ActionResult saveOrUpdate(Comment comment) {
 
         try {

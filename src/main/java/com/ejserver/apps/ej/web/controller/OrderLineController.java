@@ -7,7 +7,6 @@ import com.ejserver.apps.ej.service.IOrderLineService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,19 +22,16 @@ public class OrderLineController {
     private IOrderLineService orderLineService;
 
     @GetMapping("/findAll")
-    @Async
     public ActionResult findAll() {
         return ActionResultUtil.success("success", orderLineService.findAll());
     }
 
     @GetMapping("/findById")
-    @Async
     public ActionResult findById(Long id) {
         return ActionResultUtil.success("success", orderLineService.findById(id));
     }
 
     @PostMapping("/deleteById")
-    @Async
     public ActionResult deleteById(Long id) {
         try {
             orderLineService.deleteById(id);
@@ -48,7 +44,6 @@ public class OrderLineController {
     }
 
     @PostMapping("/insert")
-    @Async
     public ActionResult insert(OrderLine orderLine) {
         try {
             orderLineService.insert(orderLine);
@@ -60,7 +55,6 @@ public class OrderLineController {
     }
 
     @PostMapping("/saveOrUpdate")
-    @Async
     public ActionResult saveOrUpdate(OrderLine orderLine) {
 
         try {
