@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * author:黄洋洋
+ * @author 黄洋洋
  * CustomerController
  */
 @RestController
