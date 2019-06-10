@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * @author 张连硕
  * @date 2019/06/10 afternoon
@@ -21,17 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     @Resource
     private IProductService productService;
-
+    
+    @ApiOperation("查询所有")
     @GetMapping("/findAll")
     public ActionResult findAll() {
         return ActionResultUtil.success("success", productService.findAll());
     }
 
+    @ApiOperation("通过ID查询数据")
     @GetMapping("/findById")
     public ActionResult findById(Long id) {
         return ActionResultUtil.success("success", productService.findById(id));
     }
 
+    @ApiOperation("通过ID删除数据")
     @PostMapping("/deleteById")
     public ActionResult deleteById(Long id) {
         try {
@@ -44,6 +49,7 @@ public class ProductController {
         
     }
 
+    @ApiOperation("插入数据")
     @PostMapping("/insert")
     public ActionResult insert(Product product) {
         try {
@@ -55,6 +61,7 @@ public class ProductController {
         }
     }
 
+    @ApiOperation("通过ID修改数据")
     @PostMapping("/saveOrUpdate")
     public ActionResult saveOrUpdate(Product product) {
 
