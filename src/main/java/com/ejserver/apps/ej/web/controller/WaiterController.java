@@ -1,45 +1,45 @@
 package com.ejserver.apps.ej.web.controller;
 
-import javax.annotation.Resource;
 
-import com.ejserver.apps.ej.bean.Customer;
-import com.ejserver.apps.ej.service.ICustomerService;
+import com.ejserver.apps.ej.bean.Waiter;
+import com.ejserver.apps.ej.service.IWaiterService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
-
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * author:黄洋洋
- * CustomerController
+ * WaiterController
  */
 @RestController
-@RequestMapping("customer")
-public class CustomerController {
+@RequestMapping("waiter")
+public class WaiterController {
     @Resource
-    private ICustomerService customerService;
+    private IWaiterService waiterService;
 
     @ApiOperation("查询所有")
     @GetMapping("/findAll")
     @Async
     public ActionResult findAll() {
-        return ActionResultUtil.success("success",customerService.findAll());
+        return ActionResultUtil.success("success",waiterService.findAll());
     }
 
     @ApiOperation("插入数据")
     @PostMapping("/insert")
-    public ActionResult insert(Customer record){
-        return ActionResultUtil.success("插入成功",customerService.insert(record));
+    public ActionResult insert(Waiter record){
+        return ActionResultUtil.success("插入成功",waiterService.insert(record));
     }
 
     @ApiOperation("通过ID删除数据")
     @PostMapping("/deleteById")
     public ActionResult deleteById(@ApiParam(value = "主键",required = true) @RequestParam("id") long id){
         try{
-            return ActionResultUtil.success("删除成功",customerService.deleteById(id));
+            return ActionResultUtil.success("删除成功",waiterService.deleteById(id));
         }
         catch (Exception e){
             e.printStackTrace();
@@ -49,15 +49,14 @@ public class CustomerController {
 
     @ApiOperation("通过ID修改数据")
     @PostMapping("/updateById")
-    public ActionResult updateById(Customer record){
-        return ActionResultUtil.success("修改成功",customerService.updateById(record));
+    public ActionResult updateById(Waiter record){
+        return ActionResultUtil.success("修改成功",waiterService.updateById(record));
     }
 
     @ApiOperation("通过ID查询数据")
     @GetMapping("/findById")
     public ActionResult findById(@ApiParam(value = "主键",required = true) @RequestParam("id") long id){
-        Customer customer = customerService.findById(id);
+        Waiter customer = waiterService.findById(id);
         return ActionResultUtil.success("success",customer);
     }
-
 }
