@@ -13,8 +13,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * author:黄洋洋
- * CustomerController
+ * @author 黄洋洋
+ * @date 2019/06/10 afternoon
  */
 @RestController
 @RequestMapping("customer")
@@ -26,22 +26,26 @@ public class CustomerController {
     @GetMapping("/findAll")
     @Async
     public ActionResult findAll() {
-        return ActionResultUtil.success("success",customerService.findAll());
+        return ActionResultUtil.success("success", customerService.findAll());
     }
 
     @ApiOperation("插入数据")
     @PostMapping("/insert")
-    public ActionResult insert(Customer record){
-        return ActionResultUtil.success("插入成功",customerService.insert(record));
+    public ActionResult insert(Customer record) {
+        try {
+            return ActionResultUtil.success("插入成功", customerService.insert(record));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ActionResultUtil.error("删除失败");
+        }
     }
 
     @ApiOperation("通过ID删除数据")
     @PostMapping("/deleteById")
-    public ActionResult deleteById(@ApiParam(value = "主键",required = true) @RequestParam("id") long id){
-        try{
-            return ActionResultUtil.success("删除成功",customerService.deleteById(id));
-        }
-        catch (Exception e){
+    public ActionResult deleteById(@ApiParam(value = "主键", required = true) @RequestParam("id") long id) {
+        try {
+            return ActionResultUtil.success("删除成功", customerService.deleteById(id));
+        } catch (Exception e) {
             e.printStackTrace();
             return ActionResultUtil.error("删除失败");
         }
@@ -49,8 +53,13 @@ public class CustomerController {
 
     @ApiOperation("通过ID修改数据")
     @PostMapping("/updateById")
-    public ActionResult updateById(Customer record){
-        return ActionResultUtil.success("修改成功",customerService.updateById(record));
+    public ActionResult updateById(Customer record) {
+        try {
+            return ActionResultUtil.success("修改成功", customerService.updateById(record));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ActionResultUtil.error("删除失败");
+        }
     }
 
     @ApiOperation("通过ID查询数据")

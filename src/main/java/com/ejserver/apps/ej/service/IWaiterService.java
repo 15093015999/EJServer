@@ -10,8 +10,8 @@ import java.util.List;
  */
 public interface IWaiterService {
     List<Waiter> findAll();
-    int insert(Waiter record) ;
+    int insert(Waiter record) throws Exception;
     int deleteById(Long id) throws Exception;
-    int updateById(Waiter record);
-    Waiter findById(Long id);
+    int updateById(Waiter record) throws Exception;
+    Waiter findById(Long id) ;
 }
