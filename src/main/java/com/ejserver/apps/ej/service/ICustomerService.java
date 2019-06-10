@@ -11,8 +11,8 @@ import com.ejserver.apps.ej.bean.Customer;
 public interface ICustomerService {
 
     List<Customer> findAll();
-    int insert(Customer record) ;
+    int insert(Customer record) throws Exception;
     int deleteById(Long id) throws Exception;
-    int updateById(Customer record);
+    int updateById(Customer record) throws Exception;
     Customer findById(Long id);
 }

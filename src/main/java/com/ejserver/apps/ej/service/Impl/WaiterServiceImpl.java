@@ -25,7 +25,7 @@ public class WaiterServiceImpl implements IWaiterService {
     }
 
     @Override
-    public int insert(Waiter record) {
+    public int insert(Waiter record) throws Exception{
         return waiterMapper.insert(record);
     }
 
@@ -41,7 +41,7 @@ public class WaiterServiceImpl implements IWaiterService {
     }
 
     @Override
-    public int updateById(Waiter record) {
+    public int updateById(Waiter record) throws Exception{
         return waiterMapper.updateByPrimaryKey(record);
     }
 

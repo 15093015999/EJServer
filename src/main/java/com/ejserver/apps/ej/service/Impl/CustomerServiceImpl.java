@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     //插入数据
     @Override
-    public int insert(Customer record){
+    public int insert(Customer record) throws Exception{
           return  customerMapper.insert(record);
 
     }
@@ -49,7 +49,7 @@ public class CustomerServiceImpl implements ICustomerService {
     //修改数据
 
     @Override
-    public int updateById(Customer record){
+    public int updateById(Customer record) throws Exception{
 
         return customerMapper.updateByPrimaryKey(record);
     }
