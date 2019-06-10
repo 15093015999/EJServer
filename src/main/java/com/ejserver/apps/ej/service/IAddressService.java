@@ -28,19 +28,19 @@ public interface IAddressService {
      * @param id primary key
      * @return int success return 1,error return 0
      */
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long id) throws Exception;
 
     /**
      * insert address info to ej_address
      * @param address the info you insert
      * @return int success return 1,error return 0
      */
-    int insert(Address address);
+    int insert(Address address) throws Exception;
 
     /**
      * update ej_address by primary key(id)
      * @param address update info
      * @return int success return 1,error return 0
      */
-    int updateByPrimaryKey(Address address);
+    int updateByPrimaryKey(Address address) throws Exception;
 }

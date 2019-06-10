@@ -40,20 +40,34 @@ public class AddressController {
 
     @PostMapping("/insert")
     public ActionResult insert(Address address) {
-        int insert = addressService.insert(address);
-        return insert == 1 ? ActionResultUtil.success("插入成功！") : ActionResultUtil.error("插入失败!");
+        try {
+            addressService.insert(address);
+            return ActionResultUtil.success("插入成功！");
+        }catch (Exception e){
+            return  ActionResultUtil.error("插入失败!"+e.getMessage());
+        }
+
+
     }
 
     @PostMapping("/deleteByPrimaryKey")
     public ActionResult deleteByPrimaryKey(Long id) {
-        int delete = addressService.deleteByPrimaryKey(id);
-        return delete == 1 ? ActionResultUtil.success("删除成功！") : ActionResultUtil.error("删除失败!");
+        try{
+            addressService.deleteByPrimaryKey(id);
+            return ActionResultUtil.success("删除成功！");
+        }catch (Exception e){
+            return ActionResultUtil.error("删除失败!"+e.getMessage());
+        }
     }
 
     @PostMapping("/updateByPrimaryKey")
     public ActionResult updateByPrimaryKey(Address address) {
-        int update = addressService.updateByPrimaryKey(address);
-        return update == 1 ? ActionResultUtil.success("更新成功！") : ActionResultUtil.error("更新失败!");
+        try{
+            addressService.updateByPrimaryKey(address);
+            return ActionResultUtil.success("更新成功！");
+        }catch (Exception e){
+            return ActionResultUtil.error("更新失败!");
+        }
     }
 
 }

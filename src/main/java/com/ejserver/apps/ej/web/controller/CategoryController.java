@@ -25,18 +25,30 @@ public class CategoryController {
     private ICategoryService categoryService;
     @PostMapping("/insert")
     public ActionResult insert(Category category){
-        int insert = categoryService.insert(category);
-        return insert == 1 ? ActionResultUtil.success("插入成功!") : ActionResultUtil.error("插入失败!");
+        try{
+            categoryService.insert(category);
+            return ActionResultUtil.success("插入成功!");
+        }catch (Exception e){
+            return ActionResultUtil.error("插入失败!"+e.getMessage());
+        }
     }
     @PostMapping("/deleteByPrimaryKey")
     public ActionResult deleteByPrimaryKey(Long id){
-        int delete = categoryService.deleteByPrimaryKey(id);
-        return delete == 1 ? ActionResultUtil.success("删除成功!") : ActionResultUtil.error("删除失败!");
+        try{
+            categoryService.deleteByPrimaryKey(id);
+            return ActionResultUtil.success("删除成功!");
+        }catch (Exception e){
+            return ActionResultUtil.error("删除失败!");
+        }
     }
     @PostMapping("/updateByPrimaryKey")
     public ActionResult updateByPrimaryKey(Category category){
-        int update = categoryService.updateByPrimaryKey(category);
-        return update == 1 ? ActionResultUtil.success("更新成功!") : ActionResultUtil.error("更新失败!");
+        try{
+            categoryService.updateByPrimaryKey(category);
+            return ActionResultUtil.success("更新成功!");
+        }catch (Exception e){
+            return ActionResultUtil.error("更新失败!");
+        }
     }
     @GetMapping("/selectByExample")
     public ActionResult selectByExample(){

@@ -15,21 +15,21 @@ public interface ICategoryService {
      * @param category insert info
      * @return int success return 1,fail return 0
      */
-    int insert(Category category);
+    int insert(Category category) throws Exception;
 
     /**
      * delete info from ej_category by primaryKey(id)
      * @param id primary key
      * @return int success return 1,fail return 0
      */
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long id) throws Exception;
 
     /**
      * update ej_category by primary key(id)
      * @param category primary key
      * @return int success return 1,fail return 0
      */
-    int updateByPrimaryKey(Category category);
+    int updateByPrimaryKey(Category category) throws Exception;
 
     /**
      * select all info from ej_category
