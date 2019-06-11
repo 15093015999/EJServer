@@ -1,6 +1,8 @@
 package com.ejserver.apps.ej.web.controller;
 
 import com.ejserver.apps.ej.bean.Waiter;
+import com.ejserver.apps.ej.dto.WaiterAndOrder;
+import com.ejserver.apps.ej.service.IOrderService;
 import com.ejserver.apps.ej.service.IWaiterService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
@@ -20,6 +22,8 @@ import javax.annotation.Resource;
 public class WaiterController {
     @Resource
     private IWaiterService waiterService;
+    @Resource
+    private IOrderService orderService;
 
     @ApiOperation("查询所有")
     @GetMapping("/findAll")
@@ -63,8 +67,22 @@ public class WaiterController {
 
     @ApiOperation("通过ID查询数据")
     @GetMapping("/findById")
-    public ActionResult findById(@ApiParam(value = "主键",required = true) @RequestParam("id") long id){
+    public ActionResult findById(@ApiParam(value = "主键", required = true) @RequestParam("id") long id) {
         Waiter customer = waiterService.findById(id);
-        return ActionResultUtil.success("success",customer);
+        return ActionResultUtil.success("success", customer);
+    }
+
+    
+    @ApiOperation("通过工人Id查找工人和订单")
+    @PostMapping("/findWaiterAndOrderByWaiterId")
+    public ActionResult findWaiterAndOrderByWaiterId(Long id) {
+        Waiter waiter = waiterService.findById(id);
+        if (waiter == null) {
+            return ActionResultUtil.error("id不存在");
+        }
+        WaiterAndOrder waiterAndOrder = new WaiterAndOrder();
+        waiterAndOrder.setWaiter(waiter);
+        waiterAndOrder.setOrders(orderService.findByWaiterId(id));
+        return ActionResultUtil.success("成功", waiterAndOrder);
     }
 }

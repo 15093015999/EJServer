@@ -3,7 +3,6 @@ package com.ejserver.apps.ej.web.controller;
 import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Customer;
-import com.ejserver.apps.ej.dto.CustomerAndAddress;
 import com.ejserver.apps.ej.service.IAddressService;
 import com.ejserver.apps.ej.service.ICustomerService;
 import com.ejserver.apps.ej.utils.ActionResult;
