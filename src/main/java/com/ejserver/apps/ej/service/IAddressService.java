@@ -51,9 +51,8 @@ public interface IAddressService {
     /**
      * find Customer And Address info By CustomerId
      * @param id address's foreign key , customer's primary key
-     * @return CustomerAndAddress
+     * @return Address
      */
-    CustomerAndAddress findCustomerAndAddressByCustomerId(Long id);
-
+    List<Address> findAddressByCustomerId(Long id);
 
 }
