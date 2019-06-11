@@ -52,5 +52,13 @@ public class CommentServiceImpl implements ICommentService {
         return commentMapper.selectByExample(example);
     }
 
-    
+    @Override
+    public void batchDelete(Long[] ids){
+        for (Long id:
+                ids ) {
+            commentMapper.deleteByPrimaryKey(id);
+        }
+    }
+
+
 }

@@ -53,4 +53,11 @@ public interface IAddressService {
      */
     List<Address> findAddressByCustomerId(Long id);
 
+    /**
+     * 批量删除
+     * @param ids id
+     * @throws Exception exception
+     */
+    void batchDelete(Long[] ids) throws Exception;
+
 }
