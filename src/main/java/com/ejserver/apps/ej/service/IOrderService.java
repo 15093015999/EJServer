@@ -17,4 +17,5 @@ public interface IOrderService {
     List<Order> findByCustomerId(Long id);
     List<Order> findByWaiterId(Long id);
     List<Order> findByAddressId(Long id);
+    void batchDelete(Long[] ids) throws Exception;
 }
