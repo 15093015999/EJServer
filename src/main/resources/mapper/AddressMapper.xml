@@ -315,4 +315,10 @@
       customer_id = #{customerId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="selectAddressByCustomerId" resultType="com.ejserver.apps.ej.bean.Address">
+    select * from ej_address
+    where customer_id=#{customerId}
+  </select>
 </mapper>
