@@ -84,7 +84,7 @@ public class OrderController {
     }
 
     @ApiOperation("通过订单Id查找订单和评论")
-    @PostMapping("/findOrderAndCommentByOrderId")
+    @GetMapping("/findOrderAndCommentByOrderId")
     public ActionResult findOrderAndCommentByOrderId(Long id) {
         Order order = orderService.findById(id);
         if(order == null){
@@ -97,7 +97,7 @@ public class OrderController {
     }
 
     @ApiOperation("通过订单Id查找订单和订单项")
-    @PostMapping("/findOrderAndOrderLineByOrderId")
+    @GetMapping("/findOrderAndOrderLineByOrderId")
     public ActionResult findOrderAndOrderLineByOrderId(Long id) {
         Order order = orderService.findById(id);
         if(order == null){

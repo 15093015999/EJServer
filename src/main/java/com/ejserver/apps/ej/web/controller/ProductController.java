@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
-import java.util.List;
-
 /**
  * @author 张连硕
  * 2019/06/10 afternoon
@@ -82,7 +80,7 @@ public class ProductController {
     }
 
     @ApiOperation("通过商品Id查找商品和列表项")
-    @PostMapping("/findProductAndOrderLineByProductId")
+    @GetMapping("/findProductAndOrderLineByProductId")
     public ActionResult findProductAndOrderLineByProductId(Long id) {
         Product product = productService.findById(id);
         if (product == null) {
