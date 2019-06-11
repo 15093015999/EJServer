@@ -45,5 +45,12 @@ public class CommentServiceImpl implements ICommentService {
         return commentMapper.updateByPrimaryKey(comment);
     }
 
+    @Override
+    public List<Comment> findByOrderId(Long id) {
+        CommentExample example =new CommentExample();
+        example.createCriteria().andOrderIdEqualTo(id);
+        return commentMapper.selectByExample(example);
+    }
+
     
 }

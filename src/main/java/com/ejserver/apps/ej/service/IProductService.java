@@ -12,5 +12,5 @@ public interface IProductService {
     int deleteById(Long id) throws Exception;
     int insert(Product product) throws Exception;
     int saveOrUpdate(Product product) throws Exception;
-
+    List<Product> findByCategoryId(Long id);
 }

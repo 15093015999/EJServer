@@ -45,5 +45,19 @@ public class OrderLineServiceImpl implements IOrderLineService {
         return orderLineMapper.updateByPrimaryKey(orderLine);
     }
 
+    @Override
+    public List<OrderLine> findByProductId(Long id) {
+        OrderLineExample example =new OrderLineExample();
+        example.createCriteria().andProductIdEqualTo(id);
+        return orderLineMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<OrderLine> findByOrderId(Long id) {
+        OrderLineExample example =new OrderLineExample();
+        example.createCriteria().andOrderIdEqualTo(id);
+        return orderLineMapper.selectByExample(example);
+    }
+
     
 }

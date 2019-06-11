@@ -15,4 +15,5 @@ public interface ICommentService {
     int deleteById(Long id) throws Exception;
     int insert(Comment comment) throws Exception;
     int saveOrUpdate(Comment comment) throws Exception;
+    List<Comment> findByOrderId(Long id);
 }
