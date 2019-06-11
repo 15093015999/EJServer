@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import com.ejserver.apps.ej.bean.Product;
 import com.ejserver.apps.ej.bean.ProductExample;
 import com.ejserver.apps.ej.dao.ProductMapper;
-import com.ejserver.apps.ej.dao.extend.ProductExtendMapper;
 import com.ejserver.apps.ej.service.IProductService;
 
 import org.springframework.stereotype.Service;
@@ -19,13 +18,6 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements IProductService {
     @Resource
     private ProductMapper productMapper;
-    @Resource
-    private ProductExtendMapper productExtendMapper;
-
-    @Override
-    public List<ProductExtend> findAllWithCategory() {
-        return productExtendMapper.selectAll();
-    }
 
     @Override
     public List<Product> findAll() {
