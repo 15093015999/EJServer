@@ -2,7 +2,10 @@ package com.ejserver.apps.ej.service.Impl;
 
 import com.ejserver.apps.ej.bean.Address;
 import com.ejserver.apps.ej.bean.AddressExample;
+import com.ejserver.apps.ej.bean.Customer;
+import com.ejserver.apps.ej.dto.CustomerAndAddress;
 import com.ejserver.apps.ej.dao.AddressMapper;
+import com.ejserver.apps.ej.dao.CustomerMapper;
 import com.ejserver.apps.ej.service.IAddressService;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,8 @@ import java.util.List;
 public class AddressServiceImpl implements IAddressService {
     @Resource
     private AddressMapper addressMapper;
+    @Resource
+    private CustomerMapper customerMapper;
     @Override
     public List<Address> selectByExample() {
         AddressExample addressExample = new AddressExample();
@@ -41,5 +46,16 @@ public class AddressServiceImpl implements IAddressService {
     @Override
     public int updateByPrimaryKey(Address address) {
         return addressMapper.updateByPrimaryKey(address);
+    }
+
+    @Override
+    public CustomerAndAddress findCustomerAndAddressByCustomerId(Long id) {
+        Customer customer = customerMapper.selectByPrimaryKey(id);
+        List<Address> addresses = addressMapper.selectAddressByCustomerId(id);
+        CustomerAndAddress customerAndAddress=new CustomerAndAddress();
+        customerAndAddress.setAddress(addresses);
+        customerAndAddress.setCustomer(customer);
+
+        return customerAndAddress;
     }
 }

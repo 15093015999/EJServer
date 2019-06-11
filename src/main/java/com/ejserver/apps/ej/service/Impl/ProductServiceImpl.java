@@ -46,4 +46,11 @@ public class ProductServiceImpl implements IProductService {
         return productMapper.insert(product);
     }
 
+    @Override
+    public List<Product> findByCategoryId(Long id) {
+        ProductExample example =new ProductExample();
+        example.createCriteria().andCategoryIdEqualTo(id);
+        return productMapper.selectByExample(example);
+    }
+
 }

@@ -45,5 +45,28 @@ public class OrderServiceImpl implements IOrderService {
         return orderMapper.updateByPrimaryKey(order);
     }
 
+    @Override
+    public List<Order> findByCustomerId(Long id){
+        OrderExample example =new OrderExample();
+        example.createCriteria().andCustomerIdEqualTo(id);
+        return orderMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<Order> findByWaiterId(Long id) {
+        OrderExample example =new OrderExample();
+        example.createCriteria().andWaiterIdEqualTo(id);
+        return orderMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<Order> findByAddressId(Long id) {
+        OrderExample example =new OrderExample();
+        example.createCriteria().andAddressIdEqualTo(id);
+        return orderMapper.selectByExample(example);
+    }
+
+
+
     
 }

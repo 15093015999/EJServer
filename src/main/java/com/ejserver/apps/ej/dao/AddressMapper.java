@@ -93,4 +93,11 @@ public interface AddressMapper {
      * @mbg.generated Mon Jun 10 11:41:21 CST 2019
      */
     int updateByPrimaryKey(Address record);
+
+    /**
+     *select Address By CustomerId
+     * @param customerId foreign key
+     * @return Address
+     */
+    List<Address> selectAddressByCustomerId(Long customerId);
 }

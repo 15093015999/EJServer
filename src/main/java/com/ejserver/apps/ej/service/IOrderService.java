@@ -14,4 +14,7 @@ public interface IOrderService {
     int deleteById(Long id) throws Exception;
     int insert(Order order) throws Exception;
     int saveOrUpdate(Order order) throws Exception;
+    List<Order> findByCustomerId(Long id);
+    List<Order> findByWaiterId(Long id);
+    List<Order> findByAddressId(Long id);
 }
