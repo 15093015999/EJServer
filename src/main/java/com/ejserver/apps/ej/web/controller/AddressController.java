@@ -93,4 +93,18 @@ public class AddressController {
         addressAndOrder.setOrders(orders);
         return ActionResultUtil.success("成功",addressAndOrder);
     }
+    @ApiOperation("批量删除Address")
+    @PostMapping("/batchDelete")
+    public ActionResult batchDelete(Long[] ids){
+        if (ids==null){
+            return ActionResultUtil.error("失败!");
+        }
+        try {
+            addressService.batchDelete(ids);
+            return ActionResultUtil.success("成功!");
+        } catch (Exception e) {
+            return ActionResultUtil.error("失败!");
+        }
+
+    }
 }

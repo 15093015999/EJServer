@@ -41,4 +41,12 @@ public class CategoryServiceImpl implements ICategoryService {
     public Category selectByPrimaryKey(Long id) {
         return categoryMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public void batchDelete(Long[] ids) {
+        for (Long id:
+                ids ) {
+            categoryMapper.deleteByPrimaryKey(id);
+        }
+    }
 }

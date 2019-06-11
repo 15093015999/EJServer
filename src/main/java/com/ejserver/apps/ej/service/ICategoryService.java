@@ -44,4 +44,11 @@ public interface ICategoryService {
      * @return Category : the info you want
      */
     Category selectByPrimaryKey(Long id);
+
+    /**
+     * 批量删除
+     * @param ids id
+     * @throws Exception exception
+     */
+    void batchDelete(Long[] ids) throws Exception;
 }

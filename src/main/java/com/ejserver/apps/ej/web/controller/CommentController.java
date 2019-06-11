@@ -74,5 +74,19 @@ public class CommentController {
             return ActionResultUtil.error(e.getMessage());
         }
     }
+    @ApiOperation("批量删除Comment")
+    @PostMapping("/batchDelete")
+    public ActionResult batchDelete(Long[] ids){
+        if (ids==null){
+            return ActionResultUtil.error("失败!");
+        }
+        try {
+            commentService.batchDelete(ids);
+            return ActionResultUtil.success("成功!");
+        } catch (Exception e) {
+            return ActionResultUtil.error("失败!");
+        }
+
+    }
 
 }
