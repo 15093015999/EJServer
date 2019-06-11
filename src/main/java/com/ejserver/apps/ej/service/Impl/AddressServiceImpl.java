@@ -20,8 +20,6 @@ import java.util.List;
 public class AddressServiceImpl implements IAddressService {
     @Resource
     private AddressMapper addressMapper;
-    @Resource
-    private CustomerMapper customerMapper;
     @Override
     public List<Address> selectByExample() {
         AddressExample addressExample = new AddressExample();
@@ -49,13 +47,13 @@ public class AddressServiceImpl implements IAddressService {
     }
 
     @Override
-    public CustomerAndAddress findCustomerAndAddressByCustomerId(Long id) {
-        Customer customer = customerMapper.selectByPrimaryKey(id);
-        List<Address> addresses = addressMapper.selectAddressByCustomerId(id);
-        CustomerAndAddress customerAndAddress=new CustomerAndAddress();
-        customerAndAddress.setAddress(addresses);
-        customerAndAddress.setCustomer(customer);
+    public List<Address> findAddressByCustomerId(Long id) {
+        AddressExample addressExample = new AddressExample();
+        addressExample.createCriteria()
+                .andCustomerIdEqualTo(id);
 
-        return customerAndAddress;
+        return addressMapper.selectByExample(addressExample);
     }
+
+
 }
