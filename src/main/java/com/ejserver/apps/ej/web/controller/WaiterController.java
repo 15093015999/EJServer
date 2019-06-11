@@ -35,7 +35,7 @@ public class WaiterController {
             return ActionResultUtil.success("插入成功", waiterService.insert(record));
         } catch (Exception e) {
             e.printStackTrace();
-            return ActionResultUtil.error("删除失败");
+            return ActionResultUtil.error("插入失败");
         }
     }
 
@@ -57,7 +57,7 @@ public class WaiterController {
             return ActionResultUtil.success("修改成功", waiterService.updateById(record));
         } catch (Exception e) {
             e.printStackTrace();
-            return ActionResultUtil.error("删除失败");
+            return ActionResultUtil.error("修改失败");
         }
     }
 
