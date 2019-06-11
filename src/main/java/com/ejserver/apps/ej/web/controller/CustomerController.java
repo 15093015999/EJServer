@@ -2,10 +2,14 @@ package com.ejserver.apps.ej.web.controller;
 
 import javax.annotation.Resource;
 
+import com.ejserver.apps.ej.bean.Address;
 import com.ejserver.apps.ej.bean.Customer;
+import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.dto.CustomerAndAddress;
+import com.ejserver.apps.ej.dto.CustomerAndOrder;
 import com.ejserver.apps.ej.service.IAddressService;
 import com.ejserver.apps.ej.service.ICustomerService;
+import com.ejserver.apps.ej.service.IOrderService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
 
@@ -13,6 +17,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author 黄洋洋
@@ -25,6 +31,8 @@ public class CustomerController {
     private ICustomerService customerService;
     @Resource
     private IAddressService addressService;
+    @Resource
+    private IOrderService orderService;
 
     @ApiOperation("查询所有")
     @GetMapping("/findAll")
@@ -71,6 +79,32 @@ public class CustomerController {
     public ActionResult findById(@ApiParam(value = "主键",required = true) @RequestParam("id") long id){
         Customer customer = customerService.findById(id);
         return ActionResultUtil.success("success",customer);
+    }
+    @ApiOperation("通过CustomerId查找到Customer和Address信息")
+    @GetMapping("/findCustomerAndAddressByCustomerId")
+    public ActionResult findCustomerAndAddressByCustomerId(Long id){
+        Customer customer = customerService.findById(id);
+        if (customer==null){
+            return ActionResultUtil.error("id不存在");
+        }
+        List<Address> addresses = addressService.findAddressByCustomerId(id);
+        CustomerAndAddress customerAndAddress=new CustomerAndAddress();
+        customerAndAddress.setAddress(addresses);
+        customerAndAddress.setCustomer(customer);
+        return ActionResultUtil.success("成功!",customerAndAddress);
+    }
+    @ApiOperation("通过客户id查询到客户以及订单信息")
+    @GetMapping("/findCustomerAndOrderByCustomerId")
+    public ActionResult findCustomerAndOrderByCustomerId(Long customerId){
+        Customer customer = customerService.findById(customerId);
+        if (customer==null){
+            return ActionResultUtil.error("id不存在");
+        }
+        List<Order> orders = orderService.findByCustomerId(customerId);
+        CustomerAndOrder customerAndOrder = new CustomerAndOrder();
+        customerAndOrder.setCustomer(customer);
+        customerAndOrder.setOrder(orders);
+        return ActionResultUtil.success("成功!",customerAndOrder);
     }
 
 }
