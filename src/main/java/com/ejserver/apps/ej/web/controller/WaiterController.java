@@ -74,7 +74,7 @@ public class WaiterController {
 
     
     @ApiOperation("通过工人Id查找工人和订单")
-    @PostMapping("/findWaiterAndOrderByWaiterId")
+    @GetMapping("/findWaiterAndOrderByWaiterId")
     public ActionResult findWaiterAndOrderByWaiterId(Long id) {
         Waiter waiter = waiterService.findById(id);
         if (waiter == null) {
