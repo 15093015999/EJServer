@@ -13,4 +13,5 @@ public interface IProductService {
     int insert(Product product) throws Exception;
     int saveOrUpdate(Product product) throws Exception;
 
+
 }

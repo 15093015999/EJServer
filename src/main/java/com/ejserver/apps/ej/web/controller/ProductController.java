@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
+import java.util.List;
+
 /**
  * @author 张连硕
  * @date 2019/06/10 afternoon
@@ -23,7 +25,8 @@ import io.swagger.annotations.ApiOperation;
 public class ProductController {
     @Resource
     private IProductService productService;
-    
+
+
     @ApiOperation("查询所有")
     @GetMapping("/findAll")
     public ActionResult findAll() {
