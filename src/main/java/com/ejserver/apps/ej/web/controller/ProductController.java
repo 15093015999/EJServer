@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @author 张连硕
- * @date 2019/06/10 afternoon
+ * 2019/06/10 afternoon
  */
 @RestController
 @RequestMapping("product")
@@ -75,6 +75,11 @@ public class ProductController {
             e.printStackTrace();
             return ActionResultUtil.error(e.getMessage());
         }
+    }
+    @ApiOperation("通过分类ID查询产品")
+    @GetMapping("/findByCategoryId")
+    public ActionResult findByCategoryId(Long id){
+        return ActionResultUtil.success("success",productService.findByCategoryId(id));
     }
 
 
