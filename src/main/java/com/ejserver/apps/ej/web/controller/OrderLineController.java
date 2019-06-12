@@ -61,17 +61,22 @@ public class OrderLineController {
         }
     }
 
-    @ApiOperation("通过ID修改数据")
+    @ApiOperation("更新或增加生产线信息")
     @PostMapping("/saveOrUpdate")
     public ActionResult saveOrUpdate(OrderLine orderLine) {
-
-        try {
-            orderLineService.saveOrUpdate(orderLine);
-            return ActionResultUtil.success("success");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ActionResultUtil.error(e.getMessage());
+        if (orderLine.getId()!=null){
+            try {
+                orderLineService.saveOrUpdate(orderLine);
+                return ActionResultUtil.success("success");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ActionResultUtil.error(e.getMessage());
+            }
         }
+        else {
+            return insert(orderLine);
+        }
+
     }
 
     @ApiOperation("批量删除")

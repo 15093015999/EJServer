@@ -105,6 +105,24 @@ public class AddressController {
         } catch (Exception e) {
             return ActionResultUtil.error("失败!");
         }
-
+    }
+    @ApiOperation("更新或增加地址信息")
+    @PostMapping("/saveOrUpdate")
+    public ActionResult saveOrUpdate(Address address){
+        if (address.getId()!=null){
+            try {
+                addressService.updateByPrimaryKey(address);
+                return ActionResultUtil.success("更新成功!");
+            } catch (Exception e) {
+                return ActionResultUtil.error("更新失败!"+e.getMessage());
+            }
+        }else {
+            try {
+                addressService.insert(address);
+                return ActionResultUtil.success("添加成功!");
+            } catch (Exception e) {
+                return ActionResultUtil.error("添加失败!"+e.getMessage());
+            }
+        }
     }
 }

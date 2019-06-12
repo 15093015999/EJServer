@@ -66,17 +66,20 @@ public class ProductController {
         }
     }
 
-    @ApiOperation("通过ID修改数据")
+    @ApiOperation("添加或更新产品信息")
     @PostMapping("/saveOrUpdate")
     public ActionResult saveOrUpdate(Product product) {
-
-        try {
-            productService.saveOrUpdate(product);
-            return ActionResultUtil.success("success");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ActionResultUtil.error(e.getMessage());
+        if (product.getId()!=null){
+            try {
+                productService.saveOrUpdate(product);
+                return ActionResultUtil.success("success");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ActionResultUtil.error(e.getMessage());
+            }
         }
+        return insert(product);
+
     }
 
     @ApiOperation("通过商品Id查找商品和列表项")
