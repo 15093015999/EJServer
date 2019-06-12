@@ -27,7 +27,6 @@ public class WaiterController {
 
     @ApiOperation("查询所有")
     @GetMapping("/findAll")
-    @Async
     public ActionResult findAll() {
         return ActionResultUtil.success("success", waiterService.findAll());
     }
@@ -96,6 +95,16 @@ public class WaiterController {
         } catch (Exception e) {
             e.printStackTrace();
             return ActionResultUtil.error("id不存在");
+        }
+    }
+
+    @ApiOperation("更新或增加工人信息")
+    @PostMapping("/saveOrUpdate")
+    public ActionResult saveOrUpdate(Waiter waiter){
+        if (waiter.getId()!=null){
+            return updateById(waiter);
+        }else {
+            return insert(waiter);
         }
     }
 }

@@ -70,24 +70,28 @@ public class OrderController {
         }
     }
 
-    @ApiOperation("通过ID修改数据")
+    @ApiOperation("增加或更新订单信息")
     @PostMapping("/saveOrUpdate")
     public ActionResult saveOrUpdate(Order order) {
-
-        try {
-            orderService.saveOrUpdate(order);
-            return ActionResultUtil.success("success");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ActionResultUtil.error(e.getMessage());
+        if (order.getId() != null) {
+            try {
+                orderService.saveOrUpdate(order);
+                return ActionResultUtil.success("success");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ActionResultUtil.error(e.getMessage());
+            }
+        } else {
+            return insert(order);
         }
+
     }
 
     @ApiOperation("通过订单Id查找订单和评论")
     @GetMapping("/findOrderAndCommentByOrderId")
     public ActionResult findOrderAndCommentByOrderId(Long id) {
         Order order = orderService.findById(id);
-        if(order == null){
+        if (order == null) {
             return ActionResultUtil.error("id不存在");
         }
         OrderAndComment orderAndComment = new OrderAndComment();
@@ -100,7 +104,7 @@ public class OrderController {
     @GetMapping("/findOrderAndOrderLineByOrderId")
     public ActionResult findOrderAndOrderLineByOrderId(Long id) {
         Order order = orderService.findById(id);
-        if(order == null){
+        if (order == null) {
             return ActionResultUtil.error("id不存在");
         }
         OrderAndOrderLine orderAndOrderLine = new OrderAndOrderLine();

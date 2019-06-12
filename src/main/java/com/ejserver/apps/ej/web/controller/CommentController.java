@@ -62,17 +62,21 @@ public class CommentController {
         }
     }
 
-    @ApiOperation("通过ID修改数据")
+    @ApiOperation("增加或更新评论信息")
     @PostMapping("/saveOrUpdate")
     public ActionResult saveOrUpdate(Comment comment) {
-
-        try {
-            commentService.saveOrUpdate(comment);
-            return ActionResultUtil.success("success");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ActionResultUtil.error(e.getMessage());
+        if(comment.getId()!=null){
+            try {
+                commentService.saveOrUpdate(comment);
+                return ActionResultUtil.success("success");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ActionResultUtil.error(e.getMessage());
+            }
         }
+            return insert(comment);
+
+
     }
     @ApiOperation("批量删除Comment")
     @PostMapping("/batchDelete")

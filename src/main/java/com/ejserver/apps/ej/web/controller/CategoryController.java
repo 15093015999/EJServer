@@ -104,6 +104,15 @@ public class CategoryController {
         } catch (Exception e) {
             return ActionResultUtil.error("失败!");
         }
+    }
 
+    @ApiOperation("更新或增加分类信息")
+    @PostMapping("/saveOrUpdate")
+    public ActionResult saveOrUpdate(Category category){
+        if (category.getId()!=null){
+            return updateByPrimaryKey(category);
+        }else {
+            return insert(category);
+        }
     }
 }
