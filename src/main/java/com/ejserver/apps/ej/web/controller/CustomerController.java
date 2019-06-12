@@ -95,35 +95,49 @@ public class CustomerController {
 
     @ApiOperation("通过ID查询数据")
     @GetMapping("/findById")
-    public ActionResult findById(@ApiParam(value = "主键",required = true) @RequestParam("id") long id){
+    public ActionResult findById(@ApiParam(value = "主键", required = true) @RequestParam("id") long id) {
         Customer customer = customerService.findById(id);
-        return ActionResultUtil.success("success",customer);
+        return ActionResultUtil.success("success", customer);
     }
+
     @ApiOperation("通过CustomerId查找到Customer和Address信息")
     @GetMapping("/findCustomerAndAddressByCustomerId")
-    public ActionResult findCustomerAndAddressByCustomerId(Long id){
+    public ActionResult findCustomerAndAddressByCustomerId(Long id) {
         Customer customer = customerService.findById(id);
-        if (customer==null){
+        if (customer == null) {
             return ActionResultUtil.error("id不存在");
         }
         List<Address> addresses = addressService.findAddressByCustomerId(id);
-        CustomerAndAddress customerAndAddress=new CustomerAndAddress();
+        CustomerAndAddress customerAndAddress = new CustomerAndAddress();
         customerAndAddress.setAddress(addresses);
         customerAndAddress.setCustomer(customer);
-        return ActionResultUtil.success("成功!",customerAndAddress);
+        return ActionResultUtil.success("成功!", customerAndAddress);
     }
+
     @ApiOperation("通过客户id查询到客户以及订单信息")
     @GetMapping("/findCustomerAndOrderByCustomerId")
-    public ActionResult findCustomerAndOrderByCustomerId(Long customerId){
+    public ActionResult findCustomerAndOrderByCustomerId(Long customerId) {
         Customer customer = customerService.findById(customerId);
-        if (customer==null){
+        if (customer == null) {
             return ActionResultUtil.error("id不存在");
         }
         List<Order> orders = orderService.findByCustomerId(customerId);
         CustomerAndOrder customerAndOrder = new CustomerAndOrder();
         customerAndOrder.setCustomer(customer);
         customerAndOrder.setOrder(orders);
-        return ActionResultUtil.success("成功!",customerAndOrder);
+        return ActionResultUtil.success("成功!", customerAndOrder);
+    }
+
+    @ApiOperation("批量删除")
+    @PostMapping("/batchDelete")
+    public ActionResult batchDelete(Long[] ids) {
+        try {
+            customerService.batchDelete(ids);
+            return ActionResultUtil.success("成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ActionResultUtil.error("id不存在");
+        }
     }
 
 }
