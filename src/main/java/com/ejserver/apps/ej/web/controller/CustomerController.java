@@ -73,6 +73,25 @@ public class CustomerController {
             return ActionResultUtil.error("修改失败");
         }
     }
+    @ApiOperation("更新或者插入客户信息")
+    @PostMapping("/saveOrUpdate")
+    public ActionResult saveOrUpdate(Customer customer){
+        if (customer.getId()!=null){
+            try {
+                customerService.updateById(customer);
+                return ActionResultUtil.success("更新成功!");
+            } catch (Exception e) {
+                return ActionResultUtil.error("更新失败!"+e.getMessage());
+            }
+        }else {
+            try {
+                customerService.insert(customer);
+                return ActionResultUtil.success("添加成功!");
+            } catch (Exception e) {
+                return ActionResultUtil.error("添加失败!"+e.getMessage());
+            }
+        }
+    }
 
     @ApiOperation("通过ID查询数据")
     @GetMapping("/findById")
