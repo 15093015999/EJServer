@@ -92,5 +92,18 @@ public class CategoryController {
         return ActionResultUtil.success("成功!",categoryAndProduct);
     }
 
+    @ApiOperation("批量删除Category")
+    @PostMapping("/batchDelete")
+    public ActionResult batchDelete(Long[] ids){
+        if (ids==null){
+            return ActionResultUtil.error("失败!");
+        }
+        try {
+            categoryService.batchDelete(ids);
+            return ActionResultUtil.success("成功!");
+        } catch (Exception e) {
+            return ActionResultUtil.error("失败!");
+        }
 
+    }
 }

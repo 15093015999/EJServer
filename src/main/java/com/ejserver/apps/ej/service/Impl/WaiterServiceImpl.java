@@ -49,4 +49,11 @@ public class WaiterServiceImpl implements IWaiterService {
     public Waiter findById(Long id) {
         return waiterMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public void batchDelete(Long[] ids) throws Exception {
+        for(Long id:ids){
+            waiterMapper.deleteByPrimaryKey(id);
+        }
+    }
 }

@@ -74,5 +74,16 @@ public class OrderLineController {
         }
     }
 
+    @ApiOperation("批量删除")
+    @PostMapping("/batchDelete")
+    public ActionResult batchDelete(Long[] ids) {
+        try {
+            orderLineService.batchDelete(ids);
+            return ActionResultUtil.success("成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ActionResultUtil.error("id不存在");
+        }
+    }
     
 }

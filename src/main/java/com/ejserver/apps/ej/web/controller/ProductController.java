@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
-import java.util.List;
-
 /**
  * @author 张连硕
  * 2019/06/10 afternoon
@@ -82,7 +80,7 @@ public class ProductController {
     }
 
     @ApiOperation("通过商品Id查找商品和列表项")
-    @PostMapping("/findProductAndOrderLineByProductId")
+    @GetMapping("/findProductAndOrderLineByProductId")
     public ActionResult findProductAndOrderLineByProductId(Long id) {
         Product product = productService.findById(id);
         if (product == null) {
@@ -92,6 +90,18 @@ public class ProductController {
         productAndOrderLine.setProduct(product);
         productAndOrderLine.setOrderLines(orderLineService.findByProductId(id));
         return ActionResultUtil.success("成功", productAndOrderLine);
+    }
+
+    @ApiOperation("批量删除")
+    @PostMapping("/batchDelete")
+    public ActionResult batchDelete(Long[] ids) {
+        try {
+            productService.batchDelete(ids);
+            return ActionResultUtil.success("成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ActionResultUtil.error("id不存在");
+        }
     }
 
 }

@@ -12,8 +12,7 @@ import com.ejserver.apps.ej.service.ICustomerService;
 import org.springframework.stereotype.Service;
 
 /**
- * 黄洋洋
- * CustomerServiceImpl
+ * 黄洋洋 CustomerServiceImpl
  */
 @Service
 public class CustomerServiceImpl implements ICustomerService {
@@ -25,39 +24,44 @@ public class CustomerServiceImpl implements ICustomerService {
         return customerMapper.selectByExample(new CustomerExample());
     }
 
-    //插入数据
+    // 插入数据
     @Override
-    public int insert(Customer record) throws Exception{
-          return  customerMapper.insert(record);
+    public int insert(Customer record) throws Exception {
+        return customerMapper.insert(record);
 
     }
 
-    //删除数据
-
+    // 删除数据
 
     @Override
-    public int deleteById(Long id) throws Exception{
+    public int deleteById(Long id) throws Exception {
         Customer customer = customerMapper.selectByPrimaryKey(id);
-        if (customer == null){
+        if (customer == null) {
             throw new Exception("要删除的客户不存在");
-        }
-        else {
+        } else {
             return customerMapper.deleteByPrimaryKey(id);
         }
     }
 
-    //修改数据
+    // 修改数据
 
     @Override
-    public int updateById(Customer record) throws Exception{
+    public int updateById(Customer record) throws Exception {
 
         return customerMapper.updateByPrimaryKey(record);
     }
 
-    //通过ID查询数据
+    // 通过ID查询数据
 
     @Override
     public Customer findById(Long id) {
         return customerMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void batchDelete(Long[] ids) throws Exception {
+        for(Long id:ids){
+            customerMapper.deleteByPrimaryKey(id);
+        }
     }
 }

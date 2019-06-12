@@ -46,4 +46,6 @@ public interface ICustomerService {
      */
     Customer findById(Long id);
 
+    void batchDelete(Long[] ids) throws Exception;
+
 }

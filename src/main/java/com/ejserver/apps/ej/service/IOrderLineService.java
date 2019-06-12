@@ -16,4 +16,5 @@ public interface IOrderLineService {
     int saveOrUpdate(OrderLine orderLine) throws Exception;
     List<OrderLine> findByProductId(Long id);
     List<OrderLine> findByOrderId(Long id);
+    void batchDelete(Long[] ids) throws Exception;
 }

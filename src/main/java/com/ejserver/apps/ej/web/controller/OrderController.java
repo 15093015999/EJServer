@@ -84,7 +84,7 @@ public class OrderController {
     }
 
     @ApiOperation("通过订单Id查找订单和评论")
-    @PostMapping("/findOrderAndCommentByOrderId")
+    @GetMapping("/findOrderAndCommentByOrderId")
     public ActionResult findOrderAndCommentByOrderId(Long id) {
         Order order = orderService.findById(id);
         if(order == null){
@@ -97,7 +97,7 @@ public class OrderController {
     }
 
     @ApiOperation("通过订单Id查找订单和订单项")
-    @PostMapping("/findOrderAndOrderLineByOrderId")
+    @GetMapping("/findOrderAndOrderLineByOrderId")
     public ActionResult findOrderAndOrderLineByOrderId(Long id) {
         Order order = orderService.findById(id);
         if(order == null){
@@ -109,4 +109,16 @@ public class OrderController {
         return ActionResultUtil.success("成功", orderAndOrderLine);
     }
 
+
+    @ApiOperation("批量删除")
+    @PostMapping("/batchDelete")
+    public ActionResult batchDelete(Long[] ids) {
+        try {
+            orderService.batchDelete(ids);
+            return ActionResultUtil.success("成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ActionResultUtil.error("id不存在");
+        }
+    }
 }

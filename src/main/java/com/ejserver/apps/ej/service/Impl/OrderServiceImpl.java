@@ -66,6 +66,13 @@ public class OrderServiceImpl implements IOrderService {
         return orderMapper.selectByExample(example);
     }
 
+    @Override
+    public void batchDelete(Long[] ids) throws Exception {
+        for(Long id:ids){
+            orderMapper.deleteByPrimaryKey(id);
+        }
+    }
+
 
 
     

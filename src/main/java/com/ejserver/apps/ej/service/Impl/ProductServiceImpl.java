@@ -53,4 +53,10 @@ public class ProductServiceImpl implements IProductService {
         return productMapper.selectByExample(example);
     }
 
+    @Override
+    public void batchDelete(Long[] ids) throws Exception {
+        for(Long id:ids){
+            productMapper.deleteByPrimaryKey(id);
+        }
+    }
 }
