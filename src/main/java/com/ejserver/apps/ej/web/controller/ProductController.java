@@ -3,6 +3,8 @@ package com.ejserver.apps.ej.web.controller;
 import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Product;
+import com.ejserver.apps.ej.dto.ProductAndOrderLine;
+import com.ejserver.apps.ej.service.IOrderLineService;
 import com.ejserver.apps.ej.service.IProductService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
@@ -25,6 +27,8 @@ import java.util.List;
 public class ProductController {
     @Resource
     private IProductService productService;
+    @Resource
+    private IOrderLineService orderLineService;
 
 
     @ApiOperation("查询所有")
@@ -49,7 +53,7 @@ public class ProductController {
             e.printStackTrace();
             return ActionResultUtil.error(e.getMessage());
         }
-        
+
     }
 
     @ApiOperation("插入数据")
@@ -75,6 +79,19 @@ public class ProductController {
             e.printStackTrace();
             return ActionResultUtil.error(e.getMessage());
         }
+    }
+
+    @ApiOperation("通过商品Id查找商品和列表项")
+    @PostMapping("/findProductAndOrderLineByProductId")
+    public ActionResult findProductAndOrderLineByProductId(Long id) {
+        Product product = productService.findById(id);
+        if (product == null) {
+            return ActionResultUtil.error("id不存在");
+        }
+        ProductAndOrderLine productAndOrderLine = new ProductAndOrderLine();
+        productAndOrderLine.setProduct(product);
+        productAndOrderLine.setOrderLines(orderLineService.findByProductId(id));
+        return ActionResultUtil.success("成功", productAndOrderLine);
     }
 
 }

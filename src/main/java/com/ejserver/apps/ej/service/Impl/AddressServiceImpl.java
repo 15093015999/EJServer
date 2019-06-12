@@ -2,10 +2,7 @@ package com.ejserver.apps.ej.service.Impl;
 
 import com.ejserver.apps.ej.bean.Address;
 import com.ejserver.apps.ej.bean.AddressExample;
-import com.ejserver.apps.ej.bean.Customer;
-import com.ejserver.apps.ej.dto.CustomerAndAddress;
 import com.ejserver.apps.ej.dao.AddressMapper;
-import com.ejserver.apps.ej.dao.CustomerMapper;
 import com.ejserver.apps.ej.service.IAddressService;
 import org.springframework.stereotype.Service;
 

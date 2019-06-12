@@ -2,7 +2,10 @@ package com.ejserver.apps.ej.web.controller;
 
 import com.ejserver.apps.ej.bean.Category;
 import com.ejserver.apps.ej.bean.CategoryExample;
+import com.ejserver.apps.ej.bean.Product;
+import com.ejserver.apps.ej.dto.CategoryAndProduct;
 import com.ejserver.apps.ej.service.ICategoryService;
+import com.ejserver.apps.ej.service.IProductService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +27,8 @@ import java.util.List;
 public class CategoryController {
     @Resource
     private ICategoryService categoryService;
+    @Resource
+    private IProductService productService;
 
     @ApiOperation("插入数据")
     @PostMapping("/insert")
@@ -73,7 +78,19 @@ public class CategoryController {
         }
         return ActionResultUtil.success("查询成功", category);
     }
-
+    @ApiOperation("通过categoryId找到分类（category）和产品（product）的信息")
+    @GetMapping("/findCategoryAndProductByCategoryId")
+    public ActionResult findCategoryAndProductByCategoryId(Long categoryId){
+        Category category = categoryService.selectByPrimaryKey(categoryId);
+        if (category==null){
+            return ActionResultUtil.error("id不存在");
+        }
+        List<Product> products = productService.findByCategoryId(categoryId);
+        CategoryAndProduct categoryAndProduct = new CategoryAndProduct();
+        categoryAndProduct.setCategory(category);
+        categoryAndProduct.setProducts(products);
+        return ActionResultUtil.success("成功!",categoryAndProduct);
+    }
 
 
 }

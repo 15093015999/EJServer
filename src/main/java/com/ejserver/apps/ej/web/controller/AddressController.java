@@ -1,7 +1,10 @@
 package com.ejserver.apps.ej.web.controller;
 
 import com.ejserver.apps.ej.bean.Address;
+import com.ejserver.apps.ej.bean.Order;
+import com.ejserver.apps.ej.dto.AddressAndOrder;
 import com.ejserver.apps.ej.service.IAddressService;
+import com.ejserver.apps.ej.service.IOrderService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,8 @@ import java.util.List;
 public class AddressController {
     @Resource
     private IAddressService addressService;
+    @Resource
+    private IOrderService orderService;
 
     @ApiOperation("查询所有")
     @GetMapping("/selectByExample")
@@ -75,5 +80,17 @@ public class AddressController {
             return ActionResultUtil.error("更新失败!");
         }
     }
-
+    @ApiOperation("通过地址id查询地址以及订单信息")
+    @GetMapping("/findAddressAndOrderByAddressId")
+    public ActionResult findAddressAndOrderByAddressId(Long addressId){
+        Address address = addressService.selectByPrimaryKey(addressId);
+        if (address==null){
+            return ActionResultUtil.error("id不存在");
+        }
+        List<Order> orders = orderService.findByAddressId(addressId);
+        AddressAndOrder addressAndOrder = new AddressAndOrder();
+        addressAndOrder.setAddress(address);
+        addressAndOrder.setOrders(orders);
+        return ActionResultUtil.success("成功",addressAndOrder);
+    }
 }

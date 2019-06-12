@@ -2,8 +2,6 @@ package com.ejserver.apps.ej.service;
 
 
 import com.ejserver.apps.ej.bean.Address;
-import com.ejserver.apps.ej.dto.CustomerAndAddress;
-
 import java.util.List;
 
 /**
