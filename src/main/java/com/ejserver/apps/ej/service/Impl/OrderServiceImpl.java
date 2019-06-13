@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.OrderExample;
+import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 import com.ejserver.apps.ej.dao.OrderMapper;
+import com.ejserver.apps.ej.dao.extend.OrderLineExtendMapper;
 import com.ejserver.apps.ej.service.IOrderService;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
 public class OrderServiceImpl implements IOrderService {
     @Resource
     private OrderMapper orderMapper;
+    @Resource
+    private OrderLineExtendMapper orderLineExtendMapper;
 
     @Override
     public List<Order> findAll() {
@@ -73,7 +77,11 @@ public class OrderServiceImpl implements IOrderService {
         }
     }
 
+    @Override
+    public List<OrderLineExtend> findOrderRightJoinOrderLine() {
+
+        return orderLineExtendMapper.findOrderRightJoinOrderLine();
+    }
 
 
-    
 }
