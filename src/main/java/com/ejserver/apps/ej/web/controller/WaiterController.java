@@ -8,7 +8,6 @@ import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -106,5 +105,10 @@ public class WaiterController {
         }else {
             return insert(waiter);
         }
+    }
+    @ApiOperation("通过服务员名进行模糊查询")
+    @GetMapping("/findByLikeRealname")
+    public ActionResult findByLikeRealname(String realname){
+        return ActionResultUtil.success("成功!",waiterService.findByLikeRealname(realname));
     }
 }

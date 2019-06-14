@@ -3,6 +3,7 @@ package com.ejserver.apps.ej.web.controller;
 import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Order;
+import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 import com.ejserver.apps.ej.dto.OrderAndComment;
 import com.ejserver.apps.ej.dto.OrderAndOrderLine;
 import com.ejserver.apps.ej.service.ICommentService;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
+
+import java.util.List;
 
 /**
  * @author 张连硕
@@ -124,5 +127,11 @@ public class OrderController {
             e.printStackTrace();
             return ActionResultUtil.error("id不存在");
         }
+    }
+    @ApiOperation("通过订单项查询所有订单项和订单")
+    @GetMapping("/findOrderRightJoinOrderLine")
+    public ActionResult findOrderRightJoinOrderLine(){
+        List<OrderLineExtend> orderRightJoinOrderLine = orderService.findOrderRightJoinOrderLine();
+        return ActionResultUtil.success("成功!",orderRightJoinOrderLine);
     }
 }

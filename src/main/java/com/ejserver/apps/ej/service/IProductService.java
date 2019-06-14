@@ -14,5 +14,6 @@ public interface IProductService {
     int saveOrUpdate(Product product) throws Exception;
     List<Product> findByCategoryId(Long id);
     void batchDelete(Long[] ids) throws Exception;
+    List<Product> findByLikeName(String name);
 
 }

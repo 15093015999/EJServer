@@ -115,4 +115,11 @@ public class CategoryController {
             return insert(category);
         }
     }
+
+
+    @ApiOperation("")
+    @GetMapping("/query")
+    public ActionResult query(String queryString) {
+        return ActionResultUtil.success("查询成功",categoryService.query(queryString));
+    }
 }

@@ -64,4 +64,11 @@ public class CustomerServiceImpl implements ICustomerService {
             customerMapper.deleteByPrimaryKey(id);
         }
     }
+
+    @Override
+    public List<Customer> findByLikeRealname(String realname) {
+        CustomerExample example=new CustomerExample();
+        example.createCriteria().andRealnameLike("%"+realname+"%");
+        return customerMapper.selectByExample(example);
+    }
 }

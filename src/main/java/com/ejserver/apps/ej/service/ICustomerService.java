@@ -48,4 +48,6 @@ public interface ICustomerService {
 
     void batchDelete(Long[] ids) throws Exception;
 
+    List<Customer> findByLikeRealname(String realname);
+
 }

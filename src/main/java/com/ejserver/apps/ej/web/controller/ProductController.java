@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
+import java.util.List;
+
 /**
  * @author 张连硕
  * 2019/06/10 afternoon
@@ -105,6 +107,12 @@ public class ProductController {
             e.printStackTrace();
             return ActionResultUtil.error("id不存在");
         }
+    }
+    @ApiOperation("通过name进行模糊查询")
+    @GetMapping("/findByLikeName")
+    public ActionResult findByLikeName(String name){
+        List<Product> products = productService.findByLikeName(name);
+        return ActionResultUtil.success("成功!",products);
     }
 
 }

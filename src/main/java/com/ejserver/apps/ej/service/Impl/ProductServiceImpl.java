@@ -59,4 +59,9 @@ public class ProductServiceImpl implements IProductService {
             productMapper.deleteByPrimaryKey(id);
         }
     }
+    @Override
+    public List<Product> findByLikeName(String name) {
+
+        return productMapper.findByLikeName(name);
+    }
 }

@@ -56,4 +56,9 @@ public class WaiterServiceImpl implements IWaiterService {
             waiterMapper.deleteByPrimaryKey(id);
         }
     }
+
+    @Override
+    public List<Waiter> findByLikeRealname(String realname) {
+        return waiterMapper.findByLikeRealname(realname);
+    }
 }
