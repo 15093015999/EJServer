@@ -93,4 +93,6 @@ public interface ProductMapper {
      * @mbg.generated Mon Jun 10 11:41:21 CST 2019
      */
     int updateByPrimaryKey(Product record);
+
+    List<Product> findByLikeName(String name);
 }

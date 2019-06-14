@@ -107,4 +107,9 @@ public class WaiterController {
             return insert(waiter);
         }
     }
+    @ApiOperation("通过服务员名进行模糊查询")
+    @GetMapping("/findByLikeRealname")
+    public ActionResult findByLikeRealname(String realname){
+        return ActionResultUtil.success("成功!",waiterService.findByLikeRealname(realname));
+    }
 }

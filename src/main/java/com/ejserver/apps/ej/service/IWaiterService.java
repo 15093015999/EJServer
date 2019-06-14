@@ -15,4 +15,5 @@ public interface IWaiterService {
     int updateById(Waiter record) throws Exception;
     Waiter findById(Long id) ;
     void batchDelete(Long[] ids) throws Exception;
+    List<Waiter> findByLikeRealname(String realname);
 }
