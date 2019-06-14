@@ -139,5 +139,10 @@ public class CustomerController {
             return ActionResultUtil.error("id不存在");
         }
     }
+    @ApiOperation("通过客户名进行模糊查询")
+    @GetMapping("/findByLikeRealname")
+    public ActionResult findByLikeRealname(String realname){
+        return ActionResultUtil.success("成功!",customerService.findByLikeRealname(realname));
+    }
 
 }
