@@ -7,20 +7,26 @@ import com.ejserver.apps.ej.service.IAddressService;
 import com.ejserver.apps.ej.service.IOrderService;
 import com.ejserver.apps.ej.utils.ActionResult;
 import com.ejserver.apps.ej.utils.ActionResultUtil;
+
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 /**
  * @author 李洋
  * @date 2019/6/10
  */
+@Validated
 @RestController
 @RequestMapping("/address")
 public class AddressController {
@@ -38,7 +44,7 @@ public class AddressController {
 
     @ApiOperation("通过ID查询数据")
     @GetMapping("/selectByPrimaryKey")
-    public ActionResult selectByPrimaryKey(Long id) {
+    public ActionResult selectByPrimaryKey(@NotNull @RequestParam Long id) {
         Address address = addressService.selectByPrimaryKey(id);
         if (address == null) {
             return ActionResultUtil.error("查询不存在");

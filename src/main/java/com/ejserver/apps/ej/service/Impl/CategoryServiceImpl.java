@@ -49,4 +49,11 @@ public class CategoryServiceImpl implements ICategoryService {
             categoryMapper.deleteByPrimaryKey(id);
         }
     }
+
+    @Override
+    public List<Category> query(String queryString) {
+        CategoryExample example = new CategoryExample();
+        example.createCriteria().andNameLike("%"+queryString+"%");
+        return categoryMapper.selectByExample(example);
+    }
 }
