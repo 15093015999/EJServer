@@ -3,6 +3,8 @@ package com.ejserver.apps.ej.dao;
 import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.OrderExample;
 import java.util.List;
+
+import com.ejserver.apps.ej.dto.OrderAndOrderLine;
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
