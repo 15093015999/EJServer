@@ -28,4 +28,11 @@ public class ActionResultUtil {
         actionResult.setTimestamp(System.currentTimeMillis());
         return actionResult;
     }
+    public static ActionResult error(int code,String msg) {
+        ActionResult actionResult = new ActionResult();
+        actionResult.setStatus(code);
+        actionResult.setMessage(msg);
+        actionResult.setTimestamp(System.currentTimeMillis());
+        return actionResult;
+    }
 }

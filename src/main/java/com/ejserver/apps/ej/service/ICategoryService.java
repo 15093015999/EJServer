@@ -51,4 +51,6 @@ public interface ICategoryService {
      * @throws Exception exception
      */
     void batchDelete(Long[] ids) throws Exception;
+
+    List<Category> query(String queryString);
 }

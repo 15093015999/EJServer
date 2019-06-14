@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
  * @date 2019/06/10 afternoon
  */
 @RestController
-@RequestMapping("order-line")
+@RequestMapping("orderLine")
 public class OrderLineController {
     @Resource
     private IOrderLineService orderLineService;
