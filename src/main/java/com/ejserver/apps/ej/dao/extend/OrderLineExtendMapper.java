@@ -9,5 +9,5 @@ import java.util.List;
  * @date 2019-06-13 20:43
  */
 public interface OrderLineExtendMapper {
-    List<OrderLineExtend> findOrderRightJoinOrderLine();
+    List<OrderLineExtend> findOrderLineInfo();
 }

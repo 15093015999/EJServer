@@ -129,9 +129,9 @@ public class OrderController {
         }
     }
     @ApiOperation("通过订单项查询所有订单项和订单")
-    @GetMapping("/findOrderRightJoinOrderLine")
-    public ActionResult findOrderRightJoinOrderLine(){
-        List<OrderLineExtend> orderRightJoinOrderLine = orderService.findOrderRightJoinOrderLine();
-        return ActionResultUtil.success("成功!",orderRightJoinOrderLine);
+    @GetMapping("/findOrderLineInfo")
+    public ActionResult findOrderLineInfo(){
+        List<OrderLineExtend> orderLineInfo = orderService.findOrderLineInfo();
+        return ActionResultUtil.success("成功!",orderLineInfo);
     }
 }

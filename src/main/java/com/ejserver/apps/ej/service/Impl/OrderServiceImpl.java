@@ -78,9 +78,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<OrderLineExtend> findOrderRightJoinOrderLine() {
-
-        return orderLineExtendMapper.findOrderRightJoinOrderLine();
+    public List<OrderLineExtend> findOrderLineInfo() {
+        return orderLineExtendMapper.findOrderLineInfo();
     }
 
 
