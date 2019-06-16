@@ -1,7 +1,7 @@
 package com.ejserver.apps.ej.web.controller;
 
 import com.ejserver.apps.ej.bean.Waiter;
-import com.ejserver.apps.ej.dto.WaiterAndOrder;
+import com.ejserver.apps.ej.vo.WaiterAndOrder;
 import com.ejserver.apps.ej.service.IOrderService;
 import com.ejserver.apps.ej.service.IWaiterService;
 import com.ejserver.apps.ej.utils.ActionResult;
@@ -43,7 +43,7 @@ public class WaiterController {
 
     @ApiOperation("通过ID删除数据")
     @PostMapping("/deleteById")
-    public ActionResult deleteById(@ApiParam(value = "主键", required = true) @RequestParam("id") long id) {
+    public ActionResult deleteById(@ApiParam(value = "主键", required = true) @RequestParam("id") Long id) {
         try {
             return ActionResultUtil.success("删除成功", waiterService.deleteById(id));
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class WaiterController {
 
     @ApiOperation("通过ID查询数据")
     @GetMapping("/findById")
-    public ActionResult findById(@ApiParam(value = "主键", required = true) @RequestParam("id") long id) {
+    public ActionResult findById(@ApiParam(value = "主键", required = true) @RequestParam("id") Long id) {
         Waiter customer = waiterService.findById(id);
         return ActionResultUtil.success("success", customer);
     }

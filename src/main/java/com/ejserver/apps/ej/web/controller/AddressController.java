@@ -2,7 +2,7 @@ package com.ejserver.apps.ej.web.controller;
 
 import com.ejserver.apps.ej.bean.Address;
 import com.ejserver.apps.ej.bean.Order;
-import com.ejserver.apps.ej.dto.AddressAndOrder;
+import com.ejserver.apps.ej.vo.AddressAndOrder;
 import com.ejserver.apps.ej.service.IAddressService;
 import com.ejserver.apps.ej.service.IOrderService;
 import com.ejserver.apps.ej.utils.ActionResult;

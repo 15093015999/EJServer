@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
+import com.ejserver.apps.ej.vo.OrderAndOrderLine;
 
 /**
  * IOrderService

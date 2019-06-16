@@ -1,5 +1,7 @@
 package com.ejserver.apps.ej.service.Impl;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -37,6 +39,7 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public int insert(Comment comment) throws Exception {
+        comment.setCommentTime(new Timestamp(new Date().getTime()));
         return commentMapper.insert(comment);
     }
 
@@ -54,10 +57,11 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public void batchDelete(Long[] ids){
-        for (Long id:
-                ids ) {
-            commentMapper.deleteByPrimaryKey(id);
+        CommentExample example = new CommentExample();
+        for(Long id:ids){
+            example.or().andIdEqualTo(id);
         }
+        commentMapper.deleteByExample(example);
     }
 
 

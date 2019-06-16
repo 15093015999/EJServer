@@ -28,7 +28,7 @@
       <result column="cName" property="customerName"/>
       <result column="address" property="address"/>
     <association property="order" javaType="com.ejserver.apps.ej.bean.Order">
-        <id column="OId" property="id"/>
+        <result column="OId" property="id"/>
         <result column="OTime" property="orderTime"/>
     </association>
   </resultMap>

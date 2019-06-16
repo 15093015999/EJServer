@@ -1,4 +1,4 @@
-package com.ejserver.apps.ej.dto;
+package com.ejserver.apps.ej.vo;
 /**
  * OrderAndComment
  */

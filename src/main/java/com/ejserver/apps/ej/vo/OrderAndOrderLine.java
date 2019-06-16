@@ -1,27 +1,27 @@
-package com.ejserver.apps.ej.dto;
+package com.ejserver.apps.ej.vo;
 
 import java.util.List;
 
+import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.OrderLine;
-import com.ejserver.apps.ej.bean.Product;
 
 /**
- * ProductAndOrderLine
+ * OrderAndOrderLine
  */
-public class ProductAndOrderLine {
-    private Product product;
+public class OrderAndOrderLine {
+    private Order order;
     private List<OrderLine> orderLines;
 
     public List<OrderLine> getOrderLines() {
         return orderLines;
     }
 
-    public Product getProduct() {
-        return product;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public void setOrderLines(List<OrderLine> orderLines) {

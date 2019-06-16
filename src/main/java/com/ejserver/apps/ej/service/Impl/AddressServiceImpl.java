@@ -54,10 +54,11 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public void batchDelete(Long[] ids){
-        for (Long id:
-            ids ) {
-            addressMapper.deleteByPrimaryKey(id);
+        AddressExample example = new AddressExample();
+        for(Long id:ids){
+            example.or().andIdEqualTo(id);
         }
+        addressMapper.deleteByExample(example);
     }
 
 
