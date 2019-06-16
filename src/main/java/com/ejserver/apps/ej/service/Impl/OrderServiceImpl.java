@@ -12,8 +12,6 @@ import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 import com.ejserver.apps.ej.dao.OrderMapper;
 import com.ejserver.apps.ej.dao.extend.OrderLineExtendMapper;
 import com.ejserver.apps.ej.service.IOrderService;
-import com.ejserver.apps.ej.vo.OrderAndOrderLine;
-
 import org.springframework.stereotype.Service;
 
 /**

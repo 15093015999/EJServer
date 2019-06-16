@@ -21,14 +21,14 @@
 				and od.address_id=a.id
   </select>
   <resultMap id="findOrderLineInfoMap" type="com.ejserver.apps.ej.bean.extend.OrderLineExtend">
-      <id column="OdlId" property="id"/>
+      <result column="OdlId" property="id"/>
       <result column="OdlNumber" property="number"/>
 
       <result column="pName" property="productName"/>
       <result column="cName" property="customerName"/>
       <result column="address" property="address"/>
     <association property="order" javaType="com.ejserver.apps.ej.bean.Order">
-        <result column="OId" property="id"/>
+        <id column="OId" property="id"/>
         <result column="OTime" property="orderTime"/>
     </association>
   </resultMap>

@@ -2,7 +2,6 @@ package com.ejserver.apps.ej.bean.extend;
 
 import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.OrderLine;
-import org.apache.logging.log4j.message.StringFormattedMessage;
 
 /**
  * @author 李洋
