@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ejserver.apps.ej.dao.extend.AddressExtendMapper">
+    <select id="findAllAddressAndCustomer" resultMap="findAllAddressAndCustomerMap">
+        SELECT
+            c.id as cId ,
+            c.realname ,
+            c.telephone as cTelephone ,
+            c.`status`  ,
+            a.id as aId ,
+            a.province  ,
+            a.city   ,
+            a.area  ,
+            a.address,
+            a.telephone as aTelephone,
+            a.customer_id
+        FROM
+            ej_address as a LEFT JOIN ej_customer as c
+            ON a.customer_id = c.id
+    </select>
+    <resultMap id="findAllAddressAndCustomerMap" type="com.ejserver.apps.ej.bean.extend.AddressExtend">
+        <id column="aId" property="id"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="area" property="area"/>
+        <result column="address" property="address"/>
+        <result column="aTelephone" property="telephone"/>
+        <result column="customer_id" property="customerId"/>
+        <association property="customer" javaType="com.ejserver.apps.ej.bean.Customer">
+            <id column="cId" property="id"/>
+            <result column="realname" property="realname"/>
+            <result column="cTelephone" property="telephone"/>
+            <result column="status" property="status"/>
+        </association>
+    </resultMap>
+</mapper>

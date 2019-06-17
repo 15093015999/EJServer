@@ -1,6 +1,7 @@
 package com.ejserver.apps.ej.service.Impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.OrderExample;
+import com.ejserver.apps.ej.bean.OrderLine;
 import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 import com.ejserver.apps.ej.dao.OrderMapper;
 import com.ejserver.apps.ej.dao.extend.OrderLineExtendMapper;
@@ -83,7 +85,15 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public List<OrderLineExtend> findOrderLineInfo() {
-        return orderLineExtendMapper.findOrderLineInfo();
+        List<OrderLineExtend> orderLineExtends = orderLineExtendMapper.findExceptOrderLine();
+        List<OrderLineExtend> orderLineExtends2 = new ArrayList<>();
+        for (OrderLineExtend o:
+             orderLineExtends) {
+            List<OrderLine> orderLines = orderLineExtendMapper.findOrderLinesByOrderId(o.getOrder().getId());
+            o.setOrderLines(orderLines);
+            orderLineExtends2.add(o);
+        }
+        return orderLineExtends2;
     }
 
 
