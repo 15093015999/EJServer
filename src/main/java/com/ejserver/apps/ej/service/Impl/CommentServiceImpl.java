@@ -39,13 +39,14 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public int insert(Comment comment) throws Exception {
-        comment.setCommentTime(new Timestamp(new Date().getTime()));
+        comment.setCommentTime(new Timestamp(System.currentTimeMillis()));
         return commentMapper.insert(comment);
     }
 
     @Override
     public int saveOrUpdate(Comment comment) throws Exception {
         return commentMapper.updateByPrimaryKey(comment);
+
     }
 
     @Override

@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 /**
  * @author 张连硕
  * @date 2019/06/10 afternoon
@@ -67,6 +73,7 @@ public class CommentController {
     public ActionResult saveOrUpdate(Comment comment) {
         if(comment.getId()!=null){
             try {
+                comment.setCommentTime(new Date());
                 commentService.saveOrUpdate(comment);
                 return ActionResultUtil.success("success");
             } catch (Exception e) {
