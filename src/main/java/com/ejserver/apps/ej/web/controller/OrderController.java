@@ -4,8 +4,8 @@ import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
-import com.ejserver.apps.ej.dto.OrderAndComment;
-import com.ejserver.apps.ej.dto.OrderAndOrderLine;
+import com.ejserver.apps.ej.vo.OrderAndComment;
+import com.ejserver.apps.ej.vo.OrderAndOrderLine;
 import com.ejserver.apps.ej.service.ICommentService;
 import com.ejserver.apps.ej.service.IOrderLineService;
 import com.ejserver.apps.ej.service.IOrderService;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -129,9 +130,22 @@ public class OrderController {
         }
     }
     @ApiOperation("通过订单项查询所有订单项和订单")
-    @GetMapping("/findOrderRightJoinOrderLine")
-    public ActionResult findOrderRightJoinOrderLine(){
-        List<OrderLineExtend> orderRightJoinOrderLine = orderService.findOrderRightJoinOrderLine();
-        return ActionResultUtil.success("成功!",orderRightJoinOrderLine);
+    @GetMapping("/findOrderLineInfo")
+    public ActionResult findOrderLineInfo(){
+        List<OrderLineExtend> orderLineInfo = orderService.findOrderLineInfo();
+        return ActionResultUtil.success("成功!",orderLineInfo);
+    }
+
+    @ApiOperation("通过订单项查询所有订单项和订单(临时)")
+    @GetMapping("/findAllOrderWithOrderLines")
+    public ActionResult findAllOrderWithOrderLines() {
+        List<OrderAndOrderLine> orderAndOrderLines = new ArrayList<OrderAndOrderLine>();
+        for(Order order : orderService.findAll()){
+            OrderAndOrderLine temp = new OrderAndOrderLine();
+            temp.setOrder(order);
+            temp.setOrderLines(orderLineService.findByOrderId(order.getId()));
+            orderAndOrderLines.add(temp) ;
+        }
+        return ActionResultUtil.success("成功!",orderAndOrderLines);
     }
 }

@@ -2,7 +2,9 @@ package com.ejserver.apps.ej.service.Impl;
 
 import com.ejserver.apps.ej.bean.Address;
 import com.ejserver.apps.ej.bean.AddressExample;
+import com.ejserver.apps.ej.bean.extend.AddressExtend;
 import com.ejserver.apps.ej.dao.AddressMapper;
+import com.ejserver.apps.ej.dao.extend.AddressExtendMapper;
 import com.ejserver.apps.ej.service.IAddressService;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import java.util.List;
 public class AddressServiceImpl implements IAddressService {
     @Resource
     private AddressMapper addressMapper;
+    @Resource
+    private AddressExtendMapper addressExtendMapper;
     @Override
     public List<Address> selectByExample() {
         AddressExample addressExample = new AddressExample();
@@ -54,10 +58,16 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public void batchDelete(Long[] ids){
-        for (Long id:
-            ids ) {
-            addressMapper.deleteByPrimaryKey(id);
+        AddressExample example = new AddressExample();
+        for(Long id:ids){
+            example.or().andIdEqualTo(id);
         }
+        addressMapper.deleteByExample(example);
+    }
+
+    @Override
+    public List<AddressExtend> findAllAddressAndCustomer() {
+        return addressExtendMapper.findAllAddressAndCustomer();
     }
 
 

@@ -5,8 +5,8 @@ import javax.annotation.Resource;
 import com.ejserver.apps.ej.bean.Address;
 import com.ejserver.apps.ej.bean.Customer;
 import com.ejserver.apps.ej.bean.Order;
-import com.ejserver.apps.ej.dto.CustomerAndAddress;
-import com.ejserver.apps.ej.dto.CustomerAndOrder;
+import com.ejserver.apps.ej.vo.CustomerAndAddress;
+import com.ejserver.apps.ej.vo.CustomerAndOrder;
 import com.ejserver.apps.ej.service.IAddressService;
 import com.ejserver.apps.ej.service.ICustomerService;
 import com.ejserver.apps.ej.service.IOrderService;
@@ -54,7 +54,7 @@ public class CustomerController {
 
     @ApiOperation("通过ID删除数据")
     @PostMapping("/deleteById")
-    public ActionResult deleteById(@ApiParam(value = "主键", required = true) @RequestParam("id") long id) {
+    public ActionResult deleteById(@ApiParam(value = "主键", required = true) @RequestParam("id") Long id) {
         try {
             return ActionResultUtil.success("删除成功", customerService.deleteById(id));
         } catch (Exception e) {
@@ -95,7 +95,7 @@ public class CustomerController {
 
     @ApiOperation("通过ID查询数据")
     @GetMapping("/findById")
-    public ActionResult findById(@ApiParam(value = "主键", required = true) @RequestParam("id") long id) {
+    public ActionResult findById(@ApiParam(value = "主键", required = true) @RequestParam("id") Long id) {
         Customer customer = customerService.findById(id);
         return ActionResultUtil.success("success", customer);
     }

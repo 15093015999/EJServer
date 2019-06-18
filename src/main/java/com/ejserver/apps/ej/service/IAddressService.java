@@ -2,6 +2,8 @@ package com.ejserver.apps.ej.service;
 
 
 import com.ejserver.apps.ej.bean.Address;
+import com.ejserver.apps.ej.bean.extend.AddressExtend;
+
 import java.util.List;
 
 /**
@@ -60,5 +62,11 @@ public interface IAddressService {
      * @throws Exception exception
      */
     void batchDelete(Long[] ids) throws Exception;
+
+    /**
+     * 查出所有的客户及其地址信息
+     * @return
+     */
+    List<AddressExtend> findAllAddressAndCustomer();
 
 }

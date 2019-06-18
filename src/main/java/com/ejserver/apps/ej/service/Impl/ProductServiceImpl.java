@@ -55,13 +55,16 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public void batchDelete(Long[] ids) throws Exception {
+        ProductExample example = new ProductExample();
         for(Long id:ids){
-            productMapper.deleteByPrimaryKey(id);
+            example.or().andIdEqualTo(id);
         }
+        productMapper.deleteByExample(example);
     }
     @Override
     public List<Product> findByLikeName(String name) {
-
-        return productMapper.findByLikeName(name);
+        ProductExample example=new ProductExample();
+        example.createCriteria().andNameLike("%"+name+"%");
+        return productMapper.selectByExample(example);
     }
 }

@@ -44,10 +44,11 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public void batchDelete(Long[] ids) {
-        for (Long id:
-                ids ) {
-            categoryMapper.deleteByPrimaryKey(id);
+        CategoryExample example = new CategoryExample();
+        for(Long id:ids){
+            example.or().andIdEqualTo(id);
         }
+        categoryMapper.deleteByExample(example);
     }
 
     @Override

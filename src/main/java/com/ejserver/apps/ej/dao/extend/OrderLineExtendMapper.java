@@ -1,5 +1,6 @@
 package com.ejserver.apps.ej.dao.extend;
 
+import com.ejserver.apps.ej.bean.OrderLine;
 import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 
 import java.util.List;
@@ -9,5 +10,6 @@ import java.util.List;
  * @date 2019-06-13 20:43
  */
 public interface OrderLineExtendMapper {
-    List<OrderLineExtend> findOrderRightJoinOrderLine();
+    List<OrderLineExtend> findExceptOrderLine();
+    List<OrderLine> findOrderLinesByOrderId(Long id);
 }

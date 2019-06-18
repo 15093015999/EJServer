@@ -2,18 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ejserver.apps.ej.dao.extend.OrderLineExtendMapper">
 
-  <select id="findOrderRightJoinOrderLine" resultMap="findOrderRightJoinOrderLineMap">
-        select od.id as OId,od.order_time as OTime,odl.id as OdlId,odl.number as OdlNumber
+
+    <select id="findExceptOrderLine" resultMap="findExceptOrderLineMap">
+        select
+            o.id as oId,
+            o.order_time,
+            o.total,
+            o.customer_id,
+            o.waiter_id,
+            o.address_id,
+            concat(a.province,"省",a.city,"市",a.area,"区",a.address) as address,
+            c.realname
         from
-        ej_order AS	od Right JOIN ej_order_line as odl on
-        od.id=odl.order_id
-  </select>
-  <resultMap id="findOrderRightJoinOrderLineMap" type="com.ejserver.apps.ej.bean.extend.OrderLineExtend">
-      <id column="OId" property="id"/>
-      <result column="OTime" property="orderTime"/>
-    <association property="orderLine" javaType="com.ejserver.apps.ej.bean.OrderLine">
-      <id column="OdlId" property="id"/>
-      <result column="OdlNumber" property="number"/>
-    </association>
-  </resultMap>
+            ej_order as o,
+            ej_address as a ,
+            ej_customer as c
+        where
+            o.customer_id=c.id
+            and o.address_id=a.id
+
+    </select>
+    <resultMap id="findExceptOrderLineMap" type="com.ejserver.apps.ej.bean.extend.OrderLineExtend">
+        <result column="address" property="address"/>
+        <result column="realname" property="customerName"/>
+        <association property="order" javaType="com.ejserver.apps.ej.bean.Order">
+            <id column="oId" property="id"/>
+            <result column="order_time" property="orderTime"/>
+            <result column="total" property="total"/>
+            <result column="customer_id" property="customerId"/>
+            <result column="waiter_id" property="waiterId"/>
+            <result column="address_id" property="addressId"/>
+        </association>
+    </resultMap>
+    <select id="findOrderLinesByOrderId" resultType="com.ejserver.apps.ej.bean.OrderLine">
+        select * from ej_order_line
+        where order_id=#{id}
+    </select>
 </mapper>

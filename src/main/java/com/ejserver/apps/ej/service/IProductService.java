@@ -15,5 +15,5 @@ public interface IProductService {
     List<Product> findByCategoryId(Long id);
     void batchDelete(Long[] ids) throws Exception;
     List<Product> findByLikeName(String name);
-
+    
 }

@@ -1,16 +1,19 @@
 package com.ejserver.apps.ej.service.Impl;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.OrderExample;
+import com.ejserver.apps.ej.bean.OrderLine;
 import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 import com.ejserver.apps.ej.dao.OrderMapper;
 import com.ejserver.apps.ej.dao.extend.OrderLineExtendMapper;
 import com.ejserver.apps.ej.service.IOrderService;
-
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,7 +28,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public List<Order> findAll() {
-        OrderExample example =new OrderExample();
+        OrderExample example = new OrderExample();
         return orderMapper.selectByExample(example);
     }
 
@@ -41,6 +44,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public int insert(Order order) throws Exception {
+        order.setOrderTime(new Timestamp(new Date().getTime()));
         return orderMapper.insert(order);
     }
 
@@ -50,37 +54,46 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    public List<Order> findByCustomerId(Long id){
-        OrderExample example =new OrderExample();
+    public List<Order> findByCustomerId(Long id) {
+        OrderExample example = new OrderExample();
         example.createCriteria().andCustomerIdEqualTo(id);
         return orderMapper.selectByExample(example);
     }
 
     @Override
     public List<Order> findByWaiterId(Long id) {
-        OrderExample example =new OrderExample();
+        OrderExample example = new OrderExample();
         example.createCriteria().andWaiterIdEqualTo(id);
         return orderMapper.selectByExample(example);
     }
 
     @Override
     public List<Order> findByAddressId(Long id) {
-        OrderExample example =new OrderExample();
+        OrderExample example = new OrderExample();
         example.createCriteria().andAddressIdEqualTo(id);
         return orderMapper.selectByExample(example);
     }
 
     @Override
     public void batchDelete(Long[] ids) throws Exception {
-        for(Long id:ids){
-            orderMapper.deleteByPrimaryKey(id);
+        OrderExample example = new OrderExample();
+        for (Long id : ids) {
+            example.or().andIdEqualTo(id);
         }
+        orderMapper.deleteByExample(example);
     }
 
     @Override
-    public List<OrderLineExtend> findOrderRightJoinOrderLine() {
-
-        return orderLineExtendMapper.findOrderRightJoinOrderLine();
+    public List<OrderLineExtend> findOrderLineInfo() {
+        List<OrderLineExtend> orderLineExtends = orderLineExtendMapper.findExceptOrderLine();
+        List<OrderLineExtend> orderLineExtends2 = new ArrayList<>();
+        for (OrderLineExtend o:
+             orderLineExtends) {
+            List<OrderLine> orderLines = orderLineExtendMapper.findOrderLinesByOrderId(o.getOrder().getId());
+            o.setOrderLines(orderLines);
+            orderLineExtends2.add(o);
+        }
+        return orderLineExtends2;
     }
 
 

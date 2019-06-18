@@ -60,9 +60,11 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public void batchDelete(Long[] ids) throws Exception {
+        CustomerExample example = new CustomerExample();
         for(Long id:ids){
-            customerMapper.deleteByPrimaryKey(id);
+            example.or().andIdEqualTo(id);
         }
+        customerMapper.deleteByExample(example);
     }
 
     @Override

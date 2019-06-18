@@ -3,7 +3,7 @@ package com.ejserver.apps.ej.web.controller;
 import com.ejserver.apps.ej.bean.Category;
 import com.ejserver.apps.ej.bean.CategoryExample;
 import com.ejserver.apps.ej.bean.Product;
-import com.ejserver.apps.ej.dto.CategoryAndProduct;
+import com.ejserver.apps.ej.vo.CategoryAndProduct;
 import com.ejserver.apps.ej.service.ICategoryService;
 import com.ejserver.apps.ej.service.IProductService;
 import com.ejserver.apps.ej.utils.ActionResult;

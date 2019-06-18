@@ -52,13 +52,17 @@ public class WaiterServiceImpl implements IWaiterService {
 
     @Override
     public void batchDelete(Long[] ids) throws Exception {
+        WaiterExample example = new WaiterExample();
         for(Long id:ids){
-            waiterMapper.deleteByPrimaryKey(id);
+            example.or().andIdEqualTo(id);
         }
+        waiterMapper.deleteByExample(example);
     }
 
     @Override
     public List<Waiter> findByLikeRealname(String realname) {
-        return waiterMapper.findByLikeRealname(realname);
+        WaiterExample example=new WaiterExample();
+        example.createCriteria().andRealnameLike("%"+realname+"%");
+        return waiterMapper.selectByExample(example);
     }
 }

@@ -2,7 +2,8 @@ package com.ejserver.apps.ej.web.controller;
 
 import com.ejserver.apps.ej.bean.Address;
 import com.ejserver.apps.ej.bean.Order;
-import com.ejserver.apps.ej.dto.AddressAndOrder;
+import com.ejserver.apps.ej.bean.extend.AddressExtend;
+import com.ejserver.apps.ej.vo.AddressAndOrder;
 import com.ejserver.apps.ej.service.IAddressService;
 import com.ejserver.apps.ej.service.IOrderService;
 import com.ejserver.apps.ej.utils.ActionResult;
@@ -130,5 +131,11 @@ public class AddressController {
                 return ActionResultUtil.error("添加失败!"+e.getMessage());
             }
         }
+    }
+    @ApiOperation("查询所有的客户及其地址信息")
+    @GetMapping("/findAllAddressAndCustomer")
+    public ActionResult findAllAddressAndCustomer(){
+        List<AddressExtend> addressAndCustomer = addressService.findAllAddressAndCustomer();
+            return ActionResultUtil.success("查询成功!",addressAndCustomer);
     }
 }

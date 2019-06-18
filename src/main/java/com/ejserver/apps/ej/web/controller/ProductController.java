@@ -3,7 +3,7 @@ package com.ejserver.apps.ej.web.controller;
 import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Product;
-import com.ejserver.apps.ej.dto.ProductAndOrderLine;
+import com.ejserver.apps.ej.vo.ProductAndOrderLine;
 import com.ejserver.apps.ej.service.IOrderLineService;
 import com.ejserver.apps.ej.service.IProductService;
 import com.ejserver.apps.ej.utils.ActionResult;
