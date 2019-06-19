@@ -139,13 +139,20 @@ public class OrderController {
     @ApiOperation("通过订单项查询所有订单项和订单(临时)")
     @GetMapping("/findAllOrderWithOrderLines")
     public ActionResult findAllOrderWithOrderLines() {
-        List<OrderAndOrderLine> orderAndOrderLines = new ArrayList<OrderAndOrderLine>();
-        for(Order order : orderService.findAll()){
-            OrderAndOrderLine temp = new OrderAndOrderLine();
-            temp.setOrder(order);
-            temp.setOrderLines(orderLineService.findByOrderId(order.getId()));
-            orderAndOrderLines.add(temp) ;
+//        List<OrderAndOrderLine> orderAndOrderLines = new ArrayList<OrderAndOrderLine>();
+//        for(Order order : orderService.findAll()){
+//            OrderAndOrderLine temp = new OrderAndOrderLine();
+//            temp.setOrder(order);
+//            temp.setOrderLines(orderLineService.findByOrderId(order.getId()));
+//            orderAndOrderLines.add(temp) ;
+//        }
+//        return ActionResultUtil.success("成功!",orderAndOrderLines);
+        List<OrderLineExtend> orderLineExtends=new ArrayList<>();
+        for (OrderLineExtend o:
+            orderService.findOrderLineInfo()) {
+            o.setOrderLines(orderLineService.findByOrderId(o.getOrder().getId()));
+            orderLineExtends.add(o);
         }
-        return ActionResultUtil.success("成功!",orderAndOrderLines);
+        return ActionResultUtil.success("成功!",orderLineExtends);
     }
 }

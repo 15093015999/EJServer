@@ -44,7 +44,7 @@ public class AddressServiceImpl implements IAddressService {
 
     @Override
     public int updateByPrimaryKey(Address address) {
-        return addressMapper.updateByPrimaryKey(address);
+        return addressMapper.updateByPrimaryKeySelective(address);
     }
 
     @Override

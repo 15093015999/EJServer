@@ -45,7 +45,7 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public int saveOrUpdate(Comment comment) throws Exception {
-        return commentMapper.updateByPrimaryKey(comment);
+        return commentMapper.updateByPrimaryKeySelective(comment);
 
     }
 

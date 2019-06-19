@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderLineExtend {
     private Order order;
     private List<OrderLine> orderLines;
-    private String productName;
+    private String waiterName;
     private String customerName;
     private String address;
 
@@ -32,12 +32,12 @@ public class OrderLineExtend {
         this.orderLines = orderLines;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getWaiterName() {
+        return waiterName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setWaiterName(String waiterName) {
+        this.waiterName = waiterName;
     }
 
     public String getCustomerName() {

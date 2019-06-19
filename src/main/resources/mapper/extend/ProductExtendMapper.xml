@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ejserver.apps.ej.dao.extend.ProductExtendMapper">
+    <select id="findAll" resultMap="findAllMap">
+        select p.id, p.name as pName, description, price, status, photo, category_id,
+        c.name as cName
+        from ej_product p,ej_category c
+        where c.id=p.category_id
+    </select>
+    <resultMap id="findAllMap" type="com.ejserver.apps.ej.bean.extend.ProductExtend">
+        <id column="id" property="id"/>
+        <result column="description" property="description"/>
+        <result column="price" property="price"/>
+        <result column="photo" property="photo"/>
+        <result column="status" property="status"/>
+        <result column="category_id" property="categoryId"/>
+
+        <result column="pName" property="name"/>
+        <association property="category" javaType="com.ejserver.apps.ej.bean.Category">
+            <result column="cName" property="name"/>
+        </association>
+    </resultMap>
+</mapper>

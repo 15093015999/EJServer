@@ -3,6 +3,8 @@ package com.ejserver.apps.ej.service;
 import java.util.List;
 
 import com.ejserver.apps.ej.bean.Product;
+import com.ejserver.apps.ej.bean.ProductExample;
+import com.ejserver.apps.ej.bean.extend.ProductExtend;
 
 
 public interface IProductService {
@@ -15,5 +17,6 @@ public interface IProductService {
     List<Product> findByCategoryId(Long id);
     void batchDelete(Long[] ids) throws Exception;
     List<Product> findByLikeName(String name);
+    List<ProductExtend> findAllExtend();
     
 }

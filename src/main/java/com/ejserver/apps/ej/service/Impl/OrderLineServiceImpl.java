@@ -42,7 +42,7 @@ public class OrderLineServiceImpl implements IOrderLineService {
 
     @Override
     public int saveOrUpdate(OrderLine orderLine) throws Exception {
-        return orderLineMapper.updateByPrimaryKey(orderLine);
+        return orderLineMapper.updateByPrimaryKeySelective(orderLine);
     }
 
     @Override
