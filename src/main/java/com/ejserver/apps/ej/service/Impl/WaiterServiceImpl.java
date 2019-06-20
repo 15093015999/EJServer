@@ -42,7 +42,7 @@ public class WaiterServiceImpl implements IWaiterService {
 
     @Override
     public int updateById(Waiter record) throws Exception{
-        return waiterMapper.updateByPrimaryKey(record);
+        return waiterMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override

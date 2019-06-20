@@ -12,19 +12,24 @@
             o.waiter_id,
             o.address_id,
             concat(a.province,"省",a.city,"市",a.area,"区",a.address) as address,
-            c.realname
+            c.realname as cRealname,
+			w.realname as wRealname
         from
             ej_order as o,
             ej_address as a ,
-            ej_customer as c
+            ej_customer as c,
+			ej_waiter as w
         where
             o.customer_id=c.id
             and o.address_id=a.id
+			and w.id=o.waiter_id
+
 
     </select>
     <resultMap id="findExceptOrderLineMap" type="com.ejserver.apps.ej.bean.extend.OrderLineExtend">
         <result column="address" property="address"/>
-        <result column="realname" property="customerName"/>
+        <result column="cRealname" property="customerName"/>
+        <result column="wRealname" property="waiterName"/>
         <association property="order" javaType="com.ejserver.apps.ej.bean.Order">
             <id column="oId" property="id"/>
             <result column="order_time" property="orderTime"/>

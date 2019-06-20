@@ -44,13 +44,13 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public int insert(Order order) throws Exception {
-        order.setOrderTime(new Timestamp(new Date().getTime()));
+        order.setOrderTime(new Timestamp(System.currentTimeMillis()));
         return orderMapper.insert(order);
     }
 
     @Override
     public int saveOrUpdate(Order order) throws Exception {
-        return orderMapper.updateByPrimaryKey(order);
+        return orderMapper.updateByPrimaryKeySelective(order);
     }
 
     @Override
@@ -86,14 +86,14 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public List<OrderLineExtend> findOrderLineInfo() {
         List<OrderLineExtend> orderLineExtends = orderLineExtendMapper.findExceptOrderLine();
-        List<OrderLineExtend> orderLineExtends2 = new ArrayList<>();
-        for (OrderLineExtend o:
-             orderLineExtends) {
-            List<OrderLine> orderLines = orderLineExtendMapper.findOrderLinesByOrderId(o.getOrder().getId());
-            o.setOrderLines(orderLines);
-            orderLineExtends2.add(o);
-        }
-        return orderLineExtends2;
+//        List<OrderLineExtend> orderLineExtends2 = new ArrayList<>();
+//        for (OrderLineExtend o:
+//             orderLineExtends) {
+//            List<OrderLine> orderLines = orderLineExtendMapper.findOrderLinesByOrderId(o.getOrder().getId());
+//            o.setOrderLines(orderLines);
+//            orderLineExtends2.add(o);
+//        }
+        return orderLineExtends;
     }
 
 

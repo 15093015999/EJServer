@@ -47,8 +47,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public int updateById(Customer record) throws Exception {
-
-        return customerMapper.updateByPrimaryKey(record);
+        return customerMapper.updateByPrimaryKeySelective(record);
     }
 
     // 通过ID查询数据

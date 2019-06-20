@@ -29,7 +29,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public int updateByPrimaryKey(Category category) {
-        return categoryMapper.updateByPrimaryKey(category);
+        return categoryMapper.updateByPrimaryKeySelective(category);
     }
 
     @Override

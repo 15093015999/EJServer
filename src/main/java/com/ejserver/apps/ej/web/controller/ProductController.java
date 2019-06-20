@@ -114,5 +114,9 @@ public class ProductController {
         List<Product> products = productService.findByLikeName(name);
         return ActionResultUtil.success("成功!",products);
     }
-
+    @ApiOperation("对findAll的拓展")
+    @GetMapping("/findAllExtend")
+    public ActionResult findAllExtend(){
+        return ActionResultUtil.success("成功!",productService.findAllExtend());
+    }
 }

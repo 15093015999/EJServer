@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Product;
 import com.ejserver.apps.ej.bean.ProductExample;
+import com.ejserver.apps.ej.bean.extend.ProductExtend;
 import com.ejserver.apps.ej.dao.ProductMapper;
+import com.ejserver.apps.ej.dao.extend.ProductExtendMapper;
 import com.ejserver.apps.ej.service.IProductService;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements IProductService {
     @Resource
     private ProductMapper productMapper;
+    @Resource
+    ProductExtendMapper productExtendMapper;
 
     @Override
     public List<Product> findAll() {
@@ -38,7 +42,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public int saveOrUpdate(Product product) throws Exception {
-        return productMapper.updateByPrimaryKey(product);
+        return productMapper.updateByPrimaryKeySelective(product);
     }
 
     @Override
@@ -66,5 +70,10 @@ public class ProductServiceImpl implements IProductService {
         ProductExample example=new ProductExample();
         example.createCriteria().andNameLike("%"+name+"%");
         return productMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<ProductExtend> findAllExtend() {
+        return productExtendMapper.findAll();
     }
 }
