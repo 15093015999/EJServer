@@ -3,6 +3,7 @@ package com.ejserver.apps.ej.web.controller;
 import javax.annotation.Resource;
 
 import com.ejserver.apps.ej.bean.Order;
+import com.ejserver.apps.ej.bean.VM.OrderVM;
 import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 import com.ejserver.apps.ej.vo.OrderAndComment;
 import com.ejserver.apps.ej.vo.OrderAndOrderLine;
@@ -154,5 +155,16 @@ public class OrderController {
             orderLineExtends.add(o);
         }
         return ActionResultUtil.success("成功!",orderLineExtends);
+    }
+
+    @ApiOperation("查询客户或者服务者全部订单信息")
+    @PostMapping("queryBasic")
+    public ActionResult queryBasic(Long customerId, Long waiterId) {
+        if (customerId==null&&waiterId==null){
+            return ActionResultUtil.error("客户ID与顾客ID不能同时为空！");
+        } else {
+            List<OrderVM> list = orderService.queryBasic(customerId, waiterId);
+            return ActionResultUtil.success("success", list);
+        }
     }
 }

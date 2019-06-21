@@ -3,6 +3,7 @@ package com.ejserver.apps.ej.service;
 import java.util.List;
 
 import com.ejserver.apps.ej.bean.Order;
+import com.ejserver.apps.ej.bean.VM.OrderVM;
 import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 
 /**
@@ -20,4 +21,5 @@ public interface IOrderService {
     List<Order> findByAddressId(Long id);
     void batchDelete(Long[] ids) throws Exception;
     List<OrderLineExtend> findOrderLineInfo();
+    List<OrderVM> queryBasic(Long customerId, Long waiterId);
 }

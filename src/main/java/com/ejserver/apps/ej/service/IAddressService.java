@@ -69,4 +69,6 @@ public interface IAddressService {
      */
     List<AddressExtend> findAllAddressAndCustomer();
 
+    List<AddressExtend> findCustomerAddressById(Long id);
+
 }

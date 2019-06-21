@@ -10,8 +10,10 @@ import javax.annotation.Resource;
 import com.ejserver.apps.ej.bean.Order;
 import com.ejserver.apps.ej.bean.OrderExample;
 import com.ejserver.apps.ej.bean.OrderLine;
+import com.ejserver.apps.ej.bean.VM.OrderVM;
 import com.ejserver.apps.ej.bean.extend.OrderLineExtend;
 import com.ejserver.apps.ej.dao.OrderMapper;
+import com.ejserver.apps.ej.dao.extend.OrderExtendMapper;
 import com.ejserver.apps.ej.dao.extend.OrderLineExtendMapper;
 import com.ejserver.apps.ej.service.IOrderService;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,13 @@ public class OrderServiceImpl implements IOrderService {
     private OrderMapper orderMapper;
     @Resource
     private OrderLineExtendMapper orderLineExtendMapper;
+    @Resource
+    private OrderExtendMapper orderExtendMapper;
+
+    @Override
+    public List<OrderVM> queryBasic(Long customerId, Long waiterId){
+        return orderExtendMapper.queryBasic(customerId, waiterId);
+    }
 
     @Override
     public List<Order> findAll() {

@@ -15,6 +15,7 @@ public interface AddressExtendMapper {
      * @return
      */
     List<AddressExtend> findAllAddressAndCustomer();
+    List<AddressExtend> findCustomerAddressById(long id);
     
 
 }

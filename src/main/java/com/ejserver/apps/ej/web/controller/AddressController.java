@@ -138,4 +138,10 @@ public class AddressController {
         List<AddressExtend> addressAndCustomer = addressService.findAllAddressAndCustomer();
             return ActionResultUtil.success("查询成功!",addressAndCustomer);
     }
+    @ApiOperation("查询顾客的地址")
+    @GetMapping("/findCustomerAddressById")
+    public ActionResult findCustomerAddressById(Long id){
+        List<AddressExtend> list = addressService.findCustomerAddressById(id);
+        return ActionResultUtil.success("查询成功!",list);
+    }
 }

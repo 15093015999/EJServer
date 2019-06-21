@@ -33,4 +33,28 @@
             <result column="status" property="status"/>
         </association>
     </resultMap>
+
+    <select id="findCustomerAddressById" resultMap="AddressExtendMapper">
+ select
+            ad.id as ad_id,
+            ct.id as ct_id,
+            province,
+            city,
+            area,
+            address,
+            ad.telephone as ad_telephone,
+            customer_id
+from ej_address ad inner join ej_customer ct
+on ct.id=ad.customer_id
+where ct.id=#{id}
+</select>
+    <resultMap id="AddressExtendMapper" type="com.ejserver.apps.ej.bean.extend.AddressExtend">
+        <id column="ad_id" jdbcType="BIGINT" property="id" />
+        <result column="province" property="province"/>
+        <result column="city"  property="city" />
+        <result column="area"  property="area" />
+        <result column="address"  property="address" />
+        <result column="ad_telephone"  property="telephone" />
+    </resultMap>
+
 </mapper>

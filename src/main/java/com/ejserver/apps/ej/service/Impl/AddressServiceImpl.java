@@ -28,6 +28,11 @@ public class AddressServiceImpl implements IAddressService {
     }
 
     @Override
+    public List<AddressExtend> findCustomerAddressById(Long id){
+        return addressExtendMapper.findCustomerAddressById(id);
+    }
+
+    @Override
     public Address selectByPrimaryKey(Long id) {
         return addressMapper.selectByPrimaryKey(id);
     }
